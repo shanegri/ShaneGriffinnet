@@ -1,15 +1,10 @@
 <?php
+interface iComponent {
 
-class iComponent {
-
-  abstract function print();
-
-
-
+public function show();
 
 
 }
-
 
 
  ?>

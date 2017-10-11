@@ -63,3 +63,11 @@ a {
 
 
 .RIGHTspacer { float: right; }
+
+footer {
+  color: grey;
+  text-align: right;
+  padding: 4px;
+  padding-right: 13px;
+  font-size: 7px;
+}

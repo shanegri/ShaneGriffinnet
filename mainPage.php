@@ -24,8 +24,10 @@
       </div>
     </div>
     <div class="RIGHTspacer">
+      <footer><a target="_blank" href="https://github.com/shanegri/ShaneGriffinNet">View Source</a></footer>
     </div>
   </body>
+
 </html>
 
 <?php } ?>

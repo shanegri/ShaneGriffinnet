@@ -1,5 +1,8 @@
 <?php
 require_once("mainPage.php");
+function __autoload($class_name) {
+    require_once('Classes/'.$class_name.'.php');
+}
 
 //Get uri
 $URI = $_SERVER['REQUEST_URI'];
