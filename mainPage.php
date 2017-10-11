@@ -13,14 +13,14 @@
     <div class="LEFTnav">
       <a href="TEMP"><p id="TITLE" style="font-size: 25px; background: black; color: white;">Shane Griffin</p></a>
       <a href="Projects"><p>PROJECTS</p></a>
-      <a href="#"><p>PHOTOGRAPHY</p></a>
-      <a href="#"><p>MOTION DESIGN</p></a>
-      <a href="#"><p>RESUME</p></a>
+      <a href="Photography"><p>PHOTOGRAPHY</p></a>
+      <a href="Motion_Design"><p>MOTION DESIGN</p></a>
+      <a href="Resume"><p>RESUME</p></a>
     </div>
     <div class="CENTERcontent">
       <h2>	&nbsp <?php echo $pageName;  ?></h2>
       <div class="CENTERcontentContent">
-        <?php require_once("PageContents/$content.html") ?>
+        <?php require_once("$content") ?>
       </div>
     </div>
     <div class="RIGHTspacer">

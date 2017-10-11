@@ -1,22 +1,42 @@
 <?php
 require_once("mainPage.php");
 
+//Get uri
 $URI = $_SERVER['REQUEST_URI'];
 $URI_EXPLODE = explode("/", $URI);
 
-$Content = $URI_EXPLODE[1];
-if($URI_EXPLODE[1] == "" && $URI_EXPLODE[2]== ""){
-  $Content ="TEMP";
+//Constants
+$HOME = "TEMP";
+$NOT_FOUND = "PAGE_NOT_FOUND";
+$BASE = "PageContents/";
+$PHP_EXT = ".php";
+
+//Page name + default page
+$cName = $URI_EXPLODE[1];
+$cUrl = $BASE . $BASE . $PHP_EXT;
+
+//Determine if on home page
+if ($URI_EXPLODE[1] == "" && $URI_EXPLODE[2]== ""){
+  $cUrl = $BASE . $HOME . $PHP_EXT;
+  $cName = $HOME;
+} else {
+  $cUrl = $BASE . $cName . $PHP_EXT;
 }
 
-$pages = json_decode(file_get_contents("pages.json"), true);
-if(!in_array($Content, $pages['Pages'])){
-  $Content = "PAGE_NOT_FOUND";
+//Check if page exists
+if(!file_exists($cUrl)){
+  $cUrl = $BASE . $NOT_FOUND . $PHP_EXT;
+  $cName = $NOT_FOUND;
 }
 
 
+//Clean up content name
+$cName = str_replace("_", " ", $cName);
 
-showMainPage($Content, $Content);
+
+// echo $cUrl;
+// echo '<br>';
+showMainPage($cUrl, $cName);
 
 
 
