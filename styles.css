@@ -45,11 +45,20 @@ a {
   position: fixed;
   width: inherit;
 }
-.CENTERcontent > div {
+.CENTERcontentContent {
+  font-size: 11px;
+  font-family: 'Open Sans', sans-serif;
   padding: 20px;
-  padding-top: 110px;
+  padding-top: 75px;
   padding-bottom: 0px;
   margin-bottom: 0px;
+}
+
+.CENTERcontentContent > h3 {
+  margin: 15px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 17px;
 }
 
 

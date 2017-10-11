@@ -1,7 +1,22 @@
 <?php
-
 require_once("mainPage.php");
-showMainPage("TEMP", "Projects");
+
+$URI = $_SERVER['REQUEST_URI'];
+$URI_EXPLODE = explode("/", $URI);
+
+$Content = $URI_EXPLODE[1];
+if($URI_EXPLODE[1] == "" && $URI_EXPLODE[2]== ""){
+  $Content ="TEMP";
+}
+
+$pages = json_decode(file_get_contents("pages.json"), true);
+if(!in_array($Content, $pages['Pages'])){
+  $Content = "PAGE_NOT_FOUND";
+}
+
+
+
+showMainPage($Content, $Content);
 
 
 
