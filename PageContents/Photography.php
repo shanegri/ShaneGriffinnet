@@ -19,7 +19,11 @@ for($i = 2 ; $i < count($images); $i++){
  ->
 <style media="screen">
 .ImageContainer {
-  line-height: 0px
+  line-height: 0px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
 }
 
 #galleryPhoto {
