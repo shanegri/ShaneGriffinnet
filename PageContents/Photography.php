@@ -12,18 +12,34 @@ for($i = 2 ; $i < count($images); $i++){
 <div class="ImageContainer">
   <?php foreach($imgObjs as $i) { $i->show(); }?>
 </div>
+<div id="ExpandedCover">
+
+</div>
+
 </>
 
 <!-TODO: MOVE TO styles.css
        : FIX GALLERY ALIGNMENT
  ->
 <style media="screen">
+#ExpandedCover {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
 .ImageContainer {
   line-height: 0px;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
 
+  display: -webkit-inline-flex; /* Safari */
+  -webkit-justify-content: center; /* Safari 6.1+ */
 }
 
 #galleryPhoto {
@@ -45,6 +61,7 @@ for($i = 2 ; $i < count($images); $i++){
 }
 
 .galleryPhotoLarge {
+  z-index: 1;
   display: none;
   position: fixed;
   width: 50%;
@@ -61,6 +78,7 @@ for($i = 2 ; $i < count($images); $i++){
   let expandedImage = null;
   function expandImage(id){
     if(!imgExpanded){
+      document.getElementById("ExpandedCover").style.display = "block";
       elem = document.getElementById(id);
       elem.style.display = "block";
       imgExpanded = true;
@@ -68,6 +86,7 @@ for($i = 2 ; $i < count($images); $i++){
   }
   function closeImage(id){
     imgExpanded = false;
+    document.getElementById("ExpandedCover").style.display = "none";
     elem = document.getElementById(id);
     elem.style.display = "none";
   }
