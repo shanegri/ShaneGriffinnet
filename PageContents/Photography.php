@@ -42,14 +42,30 @@ for($i = 2 ; $i < count($images); $i++){
 
 .galleryPhotoLarge {
   display: none;
+  position: fixed;
+  width: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom:0;
+  margin: auto;
 }
 </style>
 <script type="text/javascript">
   let cursor = 0;
+  let imgExpanded = false;
+  let expandedImage = null;
   function expandImage(id){
-    console.log(id);
+    if(!imgExpanded){
+      elem = document.getElementById(id);
+      elem.style.display = "block";
+      imgExpanded = true;
+    }
+  }
+  function closeImage(id){
+    imgExpanded = false;
     elem = document.getElementById(id);
-    elem.style.display = "block";
+    elem.style.display = "none";
   }
   function nextImage(){
 

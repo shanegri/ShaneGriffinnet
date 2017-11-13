@@ -24,6 +24,7 @@ class Image implements iComponent {
          class="galleryPhotoLarge"
          src="<?php echo $this->path ?>"
          alt="<?php echo $this->path ?>"
+         onclick="closeImage('<?php echo "gpl".$this->id; ?>');"
          />
     <?php
   }

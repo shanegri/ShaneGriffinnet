@@ -1,1 +1,1 @@
-Not Found
+<p style="text-align: center">Not Found</p>

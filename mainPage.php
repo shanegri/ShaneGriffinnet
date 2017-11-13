@@ -11,8 +11,8 @@
   </head>
   <body>
     <div class="LEFTnav">
-      <a href="TEMP"><p id="TITLE" style="font-size: 25px; background: black; color: white;">Shane Griffin</p></a>
-      <a href="Projects"><p>PROJECTS</p></a>
+      <a href="Welcome"><p id="TITLE" style="font-size: 25px; background: #0A1829; color: white;">Shane Griffin</p></a>
+      <!-- <a href="Projects"><p>PROJECTS</p></a> -->
       <a href="Photography"><p>PHOTOGRAPHY</p></a>
       <a href="Motion_Design"><p>MOTION DESIGN</p></a>
       <a href="Resume"><p>RESUME</p></a>

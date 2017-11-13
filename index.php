@@ -9,7 +9,7 @@ $URI = $_SERVER['REQUEST_URI'];
 $URI_EXPLODE = explode("/", $URI);
 
 //Constants
-$HOME = "TEMP";
+$HOME = "Welcome";
 $NOT_FOUND = "PAGE_NOT_FOUND";
 $BASE = "PageContents/";
 $PHP_EXT = ".php";
@@ -19,7 +19,7 @@ $cName = $URI_EXPLODE[1];
 $cUrl = $BASE . $BASE . $PHP_EXT;
 
 //Determine if on home page
-if ($URI_EXPLODE[1] == "" && $URI_EXPLODE[2]== ""){
+if ($URI_EXPLODE[1] == "" && isset($URI_EXPLODE[2]) && $URI_EXPLODE[2]== ""){
   $cUrl = $BASE . $HOME . $PHP_EXT;
   $cName = $HOME;
 } else {
