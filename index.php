@@ -1,47 +1,26 @@
 <?php
 require_once("mainPage.php");
+$validNames = ["Photography", "Welcome"];
+
 function __autoload($class_name) {
-    require_once('Classes/'.$class_name.'.php');
+    require_once('php/'.$class_name.'.php');
 }
 
 //Get uri
 $URI = $_SERVER['REQUEST_URI'];
-$URI_EXPLODE = explode("/", $URI);
+$path = explode("/", $URI)[1];
 
-//Constants
-$HOME = "Welcome";
-$NOT_FOUND = "PAGE_NOT_FOUND";
-$BASE = "PageContents/";
-$PHP_EXT = ".php";
 
-//Page name + default page
-$cName = $URI_EXPLODE[1];
-$cUrl = $BASE . $BASE . $PHP_EXT;
-
-//Determine if on home page
-if ($URI_EXPLODE[1] == "" && isset($URI_EXPLODE[2]) && $URI_EXPLODE[2]== ""){
-  $cUrl = $BASE . $HOME . $PHP_EXT;
-  $cName = $HOME;
+if(in_array($path, $validNames)){
+  $type = $path;
 } else {
-  $cUrl = $BASE . $cName . $PHP_EXT;
+  $type = 'Welcome';
 }
 
-//Check if page exists
-if(!file_exists($cUrl)){
-  $cUrl = $BASE . $NOT_FOUND . $PHP_EXT;
-  $cName = $NOT_FOUND;
-}
+$content = new $type;
 
-
-//Clean up content name
-$cName = str_replace("_", " ", $cName);
-
-
-// echo $cUrl;
-// echo '<br>';
-showMainPage($cUrl, $cName);
-
-
+$App = new MainPage($content, $type);
+$App->show();
 
 
 ?>

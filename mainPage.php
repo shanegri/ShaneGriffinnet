@@ -5,7 +5,8 @@
   <head>
     <meta charset="utf-8">
     <title>Shane Griffin</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="Stylesheets/styles.css">
+    <link rel="stylesheet" href="Stylesheets/photography.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
   </head>
@@ -20,7 +21,7 @@
     <div class="CENTERcontent">
       <h2>	&nbsp <?php echo $pageName;  ?></h2>
       <div class="CENTERcontentContent">
-        <?php require_once("$content") ?>
+        <?php $content->show() ?>
       </div>
     </div>
     <div class="RIGHTspacer">
