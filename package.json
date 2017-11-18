@@ -1,8 +1,8 @@
 {
   "name": "shanegriffinnet",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Shane Griffin Portfolio",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
