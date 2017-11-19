@@ -39,11 +39,13 @@ body, html{
   font-size: 20px;
   letter-spacing: 4px;
 }
-.nav-content a {
+.nav-content a, .nav-content p {
   text-decoration: none;
-  color: black;
+  color: #1B1B1B;
+  -webkit-transition: color .2s; /* Safari */
+  transition: color .2s;
 }
 .nav-content p:hover {
-  color: red;
+  color: #D9383A;
   cursor: pointer;
 }
