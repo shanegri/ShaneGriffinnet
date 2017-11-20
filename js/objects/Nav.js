@@ -9,12 +9,12 @@ function Nav(initPos){
   this.init = (newPos) => {
     this.elem.css("width", this.width + "px");
     this.elem.css("right", (-1 * this.width) + "px");
-    this.nav_content.delay(200).animate({opacity: "1", top: "15%"}, {duration: 1400, easing: 'easeOutExpo'});
+    this.nav_content.delay(200).velocity({opacity: "1", top: "15%"}, {duration: 1400, easing: 'easeOutExpo'});
     this.goTo(this.findNavCenter());
   }
   this.animateTo = (newPos) => {
-    this.elem.stop(true, true);
-    $(".nav").animate({right: newPos + "px"}, {duration: 1400, easing: 'easeOutExpo'});
+    this.elem.velocity("stop");
+    this.elem.velocity({right: newPos + "px"}, {duration: 1400, easing: 'easeOutExpo'});
   }
   this.goTo = (newPos) => {
     this.elem.stop(true, true);
@@ -41,16 +41,16 @@ function Nav(initPos){
     if(this.atCenter){
       let newPos = this.window.width() - nav.width;
       this.atCenter = false;
-      this.bg.stop(true,true);
-      this.bg.animate({backgroundColor: "rgb(255,247, 220)", width: "100%"}, 1400, 'easeOutExpo');
+      this.bg.velocity("stop");
+      this.bg.velocity({backgroundColor: "#fff7dc", width: "100%"}, 1400, 'easeOutExpo');
       this.animateTo(newPos);
     }
   }
   this.transitionToHome = () => {
     if(!this.atCenter){
       this.atCenter = true;
-      this.bg.stop(true,true);
-      this.bg.animate({backgroundColor: "rgb(255,255, 255)", width: "50%"}, 1400, 'easeOutExpo');
+      this.bg.velocity("stop");
+      this.bg.velocity({backgroundColor: "#ffffff", width: "50%"}, 1400, 'easeOutExpo');
       this.animateTo(this.findNavCenter());
     }
   }
