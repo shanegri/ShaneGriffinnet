@@ -9,12 +9,12 @@ for(i = 0 ; i < includes.length; i++){
 ///
 
 let routes = ["", {"Projects":["1", "2"]}, "Photography", "Video"];
-let nav = null;
+var nav = null;
 let content = null;
 
 let init = () => {
   nav = new Nav();
-  content = new Content(nav);
+  content = new Content();
   router();
 }
 let router = () => {

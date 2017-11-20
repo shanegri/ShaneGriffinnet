@@ -41,16 +41,12 @@ function Nav(initPos){
     if(this.atCenter){
       let newPos = this.window.width() - nav.width;
       this.atCenter = false;
-      this.bg.velocity("stop");
-      this.bg.velocity({backgroundColor: "#fff7dc", width: "100%"}, 1400, 'easeOutExpo');
       this.animateTo(newPos);
     }
   }
   this.transitionToHome = () => {
     if(!this.atCenter){
       this.atCenter = true;
-      this.bg.velocity("stop");
-      this.bg.velocity({backgroundColor: "#ffffff", width: "50%"}, 1400, 'easeOutExpo');
       this.animateTo(this.findNavCenter());
     }
   }
