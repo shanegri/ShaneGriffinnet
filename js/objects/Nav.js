@@ -2,7 +2,6 @@ function Nav(initPos){
   this.elem = $(".nav");
   this.nav_content = $(".nav-content");
   this.nav_tab = $('.nav-tab');
-  this.bg = $(".main");
   this.window =$(window);
   this.atCenter = true;
   this.width = 400;

@@ -20,11 +20,11 @@ function Content(){
     this.hide = () => {
       this.elem.velocity({opacity: 0});
       this.bg.velocity("stop");
-      this.bg.velocity({backgroundColor: colors['white'], width: "50%"}, 1400, 'easeOutExpo');
+      this.bg.velocity({backgroundColor: colors['white'], width: "100%"}, 1400, 'easeOutExpo');
     }
     this.load = () => {
       if(this.elem.children().length == 1){
-        $.get('testPage.html', function(data){
+        $.get('/Projects.html', function(data){
           $('.content').prepend(data);
         });
       }

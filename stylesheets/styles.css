@@ -8,7 +8,6 @@ body, html{
   height: 100%;
   width: 100%;
   background-color: rgb(255,255,255);
-  width: 50%;
   float: right;
 }
 
@@ -39,6 +38,16 @@ body, html{
   border-color: #dbdbdb;
   border-width: 2px 0px 2px 0px;
   border-style: solid;
+}
+.nav-cover {
+  height: 100%;
+  width: 1500px;
+  background: white;
+  position: absolute;
+  left: -1500px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 .nav-tab:hover {
   background: #dbdbdb;;
@@ -84,10 +93,10 @@ body, html{
   width: 90%;
   height: 90%;
   background: none;
-  border-radius: 10px;
+  border-radius: 1px;
   margin: auto;
-  background: white;
-  color: black;
+  background: none;
+  color: white;
 }
 .cover {
   position: absolute;
