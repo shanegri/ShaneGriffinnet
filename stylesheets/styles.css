@@ -89,18 +89,22 @@ body, html{
   width: 50%;
   height: 100%;
 }
-.content-page {
-  width: 90%;
-  height: 90%;
-  background: none;
-  border-radius: 1px;
-  margin: auto;
-  background: none;
-  color: white;
-}
+
 .cover {
+  right: 0;
   position: absolute;
-  background: rgba(255,255,255,0);
-  width: 100%;
+  background: rgba(255,255,255,1);
+  width: 0%;
   height: 100%;
+}
+.footer {
+  text-decoration: none;
+  color: grey;
+  margin: 3px;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+}
+.footer:hover {
+  color: white;
 }
