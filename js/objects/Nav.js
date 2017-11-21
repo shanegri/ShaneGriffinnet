@@ -1,6 +1,7 @@
 function Nav(initPos){
   this.elem = $(".nav");
   this.nav_content = $(".nav-content");
+  this.nav_tab = $('.nav-tab');
   this.bg = $(".main");
   this.window =$(window);
   this.atCenter = true;
@@ -17,7 +18,7 @@ function Nav(initPos){
     this.elem.velocity({right: newPos + "px"}, {duration: 1400, easing: 'easeOutExpo'});
   }
   this.goTo = (newPos) => {
-    this.elem.stop(true, true);
+    this.elem.velocity("stop");
     this.elem.css("right", newPos+"px");
   }
   this.findNavCenter = () => {
@@ -32,9 +33,16 @@ function Nav(initPos){
 
   this.maintainPos = () => {
     if(this.atCenter){
+      this.nav_tab.css('display', 'none');
       this.goTo(this.findNavCenter());
     } else {
-      this.goTo(this.findNavPos());
+      if(isMobile){
+        this.nav_tab.css('display', 'flex');
+        this.goTo(this.window.width());
+      } else {
+        this.nav_tab.css('display', 'none');
+        this.goTo(this.findNavPos());
+      }
     }
   }
   this.transitionOffHome = () => {
@@ -48,6 +56,15 @@ function Nav(initPos){
     if(!this.atCenter){
       this.atCenter = true;
       this.animateTo(this.findNavCenter());
+    }
+  }
+  this.toggleHidden = () => {
+    this.elem.velocity('stop');
+    if(this.elem.css('right') == this.window.width()+("px")){
+      let newPos = this.window.width() - nav.width;
+      this.animateTo(newPos);
+    } else {
+      this.animateTo(this.window.width());
     }
   }
 
