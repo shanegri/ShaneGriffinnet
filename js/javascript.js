@@ -8,11 +8,11 @@ for(i = 0 ; i < includes.length; i++){
 }
 ///
 
-var routes = ["", {"Projects":["1", "2"]}, "Photography", "Video"];
-var nav = null;
-var isMobile = false;
-var content = null;
+var routes = ['Projects', 'Photography', 'Video'];
 var colors = {"white": "#ffffff", "yellow": "fff7dc", "blue": "#024959"};
+var nav = null;
+var content = null;
+var isMobile = false;
 
 
 let init = () => {
@@ -35,7 +35,7 @@ let router = () => {
     } else {
       nav.transitionOffHome();
     }
-    content.expand();
+    content.expand(hash.slice(1, hash.length));
   }
 }
 let resize = () => {
