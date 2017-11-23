@@ -4,7 +4,7 @@ function Content(){
     this.bg = $('.main');
     this.cover = $('.cover');
     this.pages = {};
-    this.currentPage = '';
+    this.transition = new Transition();
 
     this.maintainWidth = () => {
       if(!isMobile){
@@ -27,26 +27,29 @@ function Content(){
       this.bg.velocity({backgroundColor: colors['white'], width: "100%"}, 1400, 'easeOutExpo');
     }
     this.load = (pageName) => {
+      let useTransition = new Boolean(isCenter);
       let handelData = (data) => {
         console.log("loading new page");
         this.pages[pageName] = data;
-        this.append(pageName);
+        this.append(pageName, useTransition);
       }
       if(routes.includes(pageName)){
         if(!(pageName in this.pages)){
           $.get('/'+pageName+'.html', handelData);
         } else {
-          this.append(pageName);
+          this.append(pageName, useTransition);
         }
       } else {
         $('.content-page').remove();
         console.log("invalid")
       }
     }
-    this.append = (pageName) => {
-      $('.content-page').remove();
-      if(this.elem.children().length == 1){
-        this.elem.prepend(this.pages[pageName]);
+    this.append = (pageName, useTransition) => {
+      if(this.elem.children().length == 2){
+        this.transition.transition(useTransition, () => {
+          $('.content-page').remove();
+          this.elem.prepend(this.pages[pageName]);
+        });
       }
     }
 

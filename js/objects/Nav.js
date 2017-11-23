@@ -45,17 +45,21 @@ function Nav(initPos){
     }
   }
   this.transitionOffHome = () => {
-    if(this.atCenter){
+    if(isMobile){
+      nav.atCenter = false;
+      nav.nav_tab.css('display', 'flex');
+      nav.animateTo(nav.window.width());
+    } else {
       let newPos = this.window.width() - nav.width;
       this.atCenter = false;
       this.animateTo(newPos);
     }
   }
   this.transitionToHome = () => {
-    if(!this.atCenter){
       this.atCenter = true;
       this.animateTo(this.findNavCenter());
-    }
+
+    nav.nav_tab.css('display', 'none');
   }
   this.toggleHidden = () => {
     this.elem.velocity('stop');

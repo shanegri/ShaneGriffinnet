@@ -1,5 +1,5 @@
 /// WILL BE REMOVED, ONLY FOR DEV
-let includes = ["js/objects/Nav.js", "js/objects/Content.js"];
+let includes = ["js/objects/Nav.js", "js/objects/Content.js", "js/objects/Transition.js"];
 for(i = 0 ; i < includes.length; i++){
   newScript = document.createElement('script');
   newScript.type = 'text/javascript';
@@ -13,40 +13,32 @@ var colors = {"white": "#ffffff", "yellow": "fff7dc", "blue": "#024959"};
 var nav = null;
 var content = null;
 var isMobile = false;
-
+var isCenter;
 
 let init = () => {
   nav = new Nav();
   content = new Content();
+  isCenter = window.location.hash = "";
   router();
   resize();
 }
 let router = () => {
   let hash = window.location.hash;
   if(hash == ""){
+    isCenter = true;
     nav.transitionToHome();
-    nav.nav_tab.css('display', 'none');
     content.hide();
   } else {
-    if(isMobile){
-      nav.atCenter = false;
-      nav.nav_tab.css('display', 'flex');
-      nav.animateTo(nav.window.width());
-    } else {
-      nav.transitionOffHome();
-    }
     content.expand(hash.slice(1, hash.length));
+    nav.transitionOffHome();
+    isCenter = false;
   }
 }
 let resize = () => {
   let aspect = $(window).width() / $(window).height();
   isMobile = aspect <= 1.2;
-  if(nav != null){
-    nav.maintainPos();
-  }
-  if(content != null){
-    content.maintainWidth();
-  }
+  if(nav != null){ nav.maintainPos(); }
+  if(content != null){ content.maintainWidth();}
 };
 
 
