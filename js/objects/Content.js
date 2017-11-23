@@ -5,6 +5,7 @@ function Content(){
     this.cover = $('.cover');
     this.pages = {};
     this.transition = new Transition();
+    this.bgColor = colors['white'];
 
     this.maintainWidth = () => {
       if(!isMobile){
@@ -19,7 +20,7 @@ function Content(){
       this.elem.css('opacity', '1');
       this.elem.css("display", "flex");
       this.bg.velocity("stop");
-      this.bg.velocity({backgroundColor: colors['blue'], width: "100%"}, 1400, 'easeOutExpo');
+      this.bg.velocity({backgroundColor: this.bgColor, width: "100%"}, 1400, 'easeOutExpo');
     }
     this.hide = () => {
       this.elem.velocity({opacity: 0});
@@ -34,6 +35,7 @@ function Content(){
         this.append(pageName, useTransition);
       }
       if(routes.includes(pageName)){
+        this.bgColor = routeColors[pageName];
         if(!(pageName in this.pages)){
           $.get('/'+pageName+'.html', handelData);
         } else {

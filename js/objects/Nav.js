@@ -3,7 +3,6 @@ function Nav(initPos){
   this.nav_content = $(".nav-content");
   this.nav_tab = $('.nav-tab');
   this.window =$(window);
-  this.atCenter = true;
   this.width = 400;
 
   this.init = (newPos) => {
@@ -31,7 +30,7 @@ function Nav(initPos){
   }
 
   this.maintainPos = () => {
-    if(this.atCenter){
+    if(isCenter){
       this.nav_tab.css('display', 'none');
       this.goTo(this.findNavCenter());
     } else {
@@ -46,19 +45,15 @@ function Nav(initPos){
   }
   this.transitionOffHome = () => {
     if(isMobile){
-      nav.atCenter = false;
       nav.nav_tab.css('display', 'flex');
       nav.animateTo(nav.window.width());
     } else {
       let newPos = this.window.width() - nav.width;
-      this.atCenter = false;
       this.animateTo(newPos);
     }
   }
   this.transitionToHome = () => {
-      this.atCenter = true;
-      this.animateTo(this.findNavCenter());
-
+    this.animateTo(this.findNavCenter());
     nav.nav_tab.css('display', 'none');
   }
   this.toggleHidden = () => {

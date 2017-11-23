@@ -9,25 +9,27 @@ for(i = 0 ; i < includes.length; i++){
 ///
 
 var routes = ['Projects', 'Photography', 'Video'];
-var colors = {"white": "#ffffff", "yellow": "fff7dc", "blue": "#024959"};
+var colors = {"white": "#ffffff", "yellow": "#EDC85A", "blue": "#055F76", "dark-grey":"#181A1B"};
+var routeColors = {'Projects': colors['blue'],
+                   'Video' : colors['yellow'],
+                   'Photography': colors['dark-grey']};
 var nav = null;
 var content = null;
 var isMobile = false;
-var isCenter;
+var isCenter = true;
 
 let init = () => {
   nav = new Nav();
   content = new Content();
-  isCenter = window.location.hash = "";
   router();
   resize();
 }
 let router = () => {
   let hash = window.location.hash;
   if(hash == ""){
-    isCenter = true;
     nav.transitionToHome();
     content.hide();
+    isCenter = true;
   } else {
     content.expand(hash.slice(1, hash.length));
     nav.transitionOffHome();
