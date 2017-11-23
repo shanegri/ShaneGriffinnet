@@ -29,7 +29,7 @@ function Content(){
     }
     this.load = (pageName) => {
       let useTransition = new Boolean(isCenter);
-      let handelData = (data) => {
+      let handelData = data => {
         console.log("loading new page");
         this.pages[pageName] = data;
         this.append(pageName, useTransition);
