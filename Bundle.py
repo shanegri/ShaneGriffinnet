@@ -4,9 +4,9 @@ import os
 '''
 Bundles all .js files in the js folder into a single file
 '''
-
-sourcePath = "/var/www/ShaneGriffinNet/js"
-destinationPath = "/var/www/ShaneGriffinNet/js/js-bundled.js"
+currentDir =  os.getcwd()
+sourcePath = currentDir + "/js"
+destinationPath = currentDir + "/js/js-bundled.js"
 
 def genFileList(path):
     initDir = os.listdir(path)
@@ -34,9 +34,8 @@ def appendToFile(fileToAppendTo, stuffPathToAppend):
     f2.close()
 
 files = genFileList(sourcePath)
-files.remove(destinationPath)
-for i in files:
-    print i
+if destinationPath in files:
+    files.remove(destinationPath)
 
 f = open(destinationPath, "w+")
 
@@ -44,5 +43,4 @@ for i in files:
         appendToFile(f, i)
 
 f.close()
-
 

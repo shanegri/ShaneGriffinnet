@@ -1,10 +1,13 @@
 <div class="content-page">
+  <div class="content-images">
+  </div>
 
 <script type="text/javascript">
 if(gallery == undefined){
   var gallery = new Gallery();
+} else {
+  gallery.init();
 }
-
 </script>
 <style media="screen">
   .content-page {
@@ -15,9 +18,14 @@ if(gallery == undefined){
     margin: auto;
     background: none;
     color: white;
+    overflow: scroll;
   }
-  .content-page p {
-    margin: 0px;
+  .galImg {
+    height: 150px;
+  }
+  .content-images {
+    height: 100%;
+    width: 100%;
   }
 </style>
 </div>
