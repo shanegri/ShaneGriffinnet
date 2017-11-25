@@ -41,6 +41,9 @@ let resize = () => {
   isMobile = aspect <= 1.2;
   if(nav != null){ nav.maintainPos(); }
   if(content != null){ content.maintainWidth();}
+  if(typeof gallery !== "undefined") {
+    gallery.setImageSize();
+  }
 };
 
 

@@ -17,9 +17,9 @@ function Content(){
     }
     this.expand = (pageName) => {
       this.load(pageName);
-      this.elem.css('opacity', '1');
       this.elem.css("display", "flex");
       this.bg.velocity("stop");
+      this.elem.velocity({opacity: 1})
       this.bg.velocity({backgroundColor: this.bgColor, width: "100%"}, 1400, 'easeOutExpo');
     }
     this.hide = () => {
