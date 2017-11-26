@@ -1,7 +1,9 @@
 function Gallery(){
 
-  this.imgHolder = $('.content-images');
+  this.imgHolder = null;
+  this.imgLargeHolder = null;
   this.images = new Array();
+  this.counter = 0;
 
   this.getImages = () => {
     let images = this.images;
@@ -18,19 +20,21 @@ function Gallery(){
       }
     });
   }
-
   this.init = () => {
     this.imgHolder = $('.content-images');
+    this.imgLargeHolder = $('.content-images-large');
     this.images.forEach((img, i) => {
-      let imgHTML = "<img class='galImg' src='' id="+img.srcID+" alt="+i+"/>"
+      let imgHTML = "<img class='galImg' src='' onclick='expandGalleryImage("+i+")' id="+img.srcID+" alt="+i+"/>"
       this.imgHolder.append("<div class='galImgContainer'>"+imgHTML+"</div>")
+      this.imgLargeHolder.append("<img class='galImgLarge' src='' id="+"large"+img.srcID+" alt="+"large"+i+"/>");
       img.imElem = document.getElementById(img.srcID);
+      img.imElemLarge = document.getElementById("large" + img.srcID);
+
     });
     let ArrayToLoadFrom = this.images.slice(0, this.images.length);
     this.setImageSize();
     this.loadRandomImage(ArrayToLoadFrom);
   }
-
   this.loadRandomImage = (ArrayToLoadFrom) => {
     if(ArrayToLoadFrom.length != 0){
       shuffleArray(ArrayToLoadFrom);
@@ -38,7 +42,6 @@ function Gallery(){
       im.load(ArrayToLoadFrom, this.loadRandomImage);
     }
   }
-
   this.setImageSize = () => {
     let totalWidth = content.width;
     let height = Math.floor(totalWidth * .166);
@@ -46,15 +49,26 @@ function Gallery(){
     this.imgHolder.css('grid-template-columns', 'repeat(6, '+height+'px)')
     this.imgHolder.css('grid-template-rows', 'repeat('+numRows+', '+height+'px)')
   }
+  this.showLargeImage = (i) => {
+    this.counter = i;
+    this.imgLargeHolder.css('display', 'flex');
+    this.images[this.counter].loadLargeImage();
+  }
+  this.hideLargeImage = () => {
+    this.imgLargeHolder.css('display', 'none');
+    this.images[this.counter].hideLargeImage();
+  }
   this.getImages();
 }
 
 function Img(src, id){
   this.srcID = id;
   this.src = 'Images/Gallery/' + src;
+  this.src_thumb = 'Images/Gallery-Thumb/thumb_' + src;
   this.srcOBJ = new Image();
-  this.srcIsLoaded = false;
+  this.srcOBJLarge = new Image();
   this.imElem = null;
+  this.imElemLarge = null;
 
   this.load = (ArrayToLoadFrom, callback) => {
     this.srcOBJ.onload = () => {
@@ -63,6 +77,14 @@ function Img(src, id){
     }
     this.srcOBJ.src = this.src;
   }
+  this.loadLargeImage = () => {
+    this.srcOBJLarge.onload = () => {
+      this.imElemLarge.src = this.src;
+      this.imElemLarge.style.display = "block";
+    }
+    this.srcOBJLarge.src = this.src;
+  }
+  this.hideLargeImage = () => { this.imElemLarge.style.display = "none"; }
 
 }
 
@@ -74,3 +96,5 @@ function shuffleArray(array) {
         array[j] = temp;
     }
 }
+function expandGalleryImage(i){ gallery.showLargeImage(i); }
+function hideGalleryImage() { gallery.hideLargeImage(); }
