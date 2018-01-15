@@ -38,7 +38,7 @@ let router = () => {
 }
 let resize = () => {
   let aspect = $(window).width() / $(window).height();
-  isMobile = aspect <= 1.2;
+  isMobile = aspect <= 1.5;
   if(nav != null){ nav.maintainPos(); }
   if(content != null){ content.maintainWidth();}
   if(typeof gallery !== "undefined") {

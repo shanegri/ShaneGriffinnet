@@ -108,6 +108,11 @@ body, html{
   color: white;
 }
 
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 /*container stuff*/
 
 .container-1, .container-2, .container-3 {
