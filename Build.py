@@ -6,11 +6,12 @@ import Bundle
 '''
 Bundles js files using Bundle.py
 Copies all required files into Build folder
+Builds Index.html
 '''
 
 cDir = os.getcwd()
 filesToIgnore = ['Bundle.pyc', 'package.json', 'javascript.js', 'jquery-3.2.1.min.js', 'velocity.min.js', '.gitignore', 'Build.py', 'Bundle.py']
-folderToIgnore = [cDir + "/Images/Gallery", cDir + "/.git", cDir + "/Build", cDir + "/js/objects"]
+folderToIgnore = [cDir + "/Images/GallerySKIP", cDir + "/.git", cDir + "/Build", cDir + "/js/objects"]
 
 print " "
 print "---------BUILDING PRODUCTION BUILD-----------"

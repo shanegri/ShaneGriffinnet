@@ -17,6 +17,9 @@ function Gallery(){
         })
         this.images = images;
         this.init();
+      },
+      error: (message) => {
+        console.log(message)
       }
     });
   }

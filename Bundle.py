@@ -30,6 +30,9 @@ def appendToFile(fileToAppendTo, stuffPathToAppend):
     f2 = open(stuffPathToAppend)
     useLine = True;
     for line in iter(f2):
+        if "td > a" in line:
+            print "'td > a' replaced with 'li > a'"
+            line = line.replace("td > a", "li > a")
         if "///SKIP" in line:
             useLine = False
         elif "///CONTINUE" in line:
