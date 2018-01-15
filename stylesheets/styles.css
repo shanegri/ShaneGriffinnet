@@ -127,6 +127,18 @@ body, html{
     grid-template-columns: 33% 33% 34%;
 }
 
+@media only screen and (max-device-width: 1200px) {
+  .container-1, .container-2, .container-3 {
+    display: block;
+  }
+}
+
+@media only screen and (max-device-width: 900px) {
+  .container-1, .container-2, .container-3 {
+    display: grid;
+  }
+}
+
 /*mobile responsivness*/
 @media only screen and (max-device-width: 580px) {
 

@@ -9,6 +9,9 @@ sourcePath = currentDir + "/js"
 destinationPath = currentDir + "/js/js-bundled.js"
 filesToIgnore = ["jquery-3.2.1.min.js", "velocity.min.js", "js-bundled.js"];
 
+print "--------BUNDLING JS FILES----------"
+print ""
+
 def genFileList(path):
     initDir = os.listdir(path)
     retVal = []
@@ -44,3 +47,7 @@ for i in files:
         appendToFile(f, i)
 
 f.close()
+
+print " "
+print "--------BUNDLE COMPLETE----------"
+
