@@ -3,15 +3,15 @@
 <!-- Rainbow -->
 <div class="container-2">
   <div>
-    <b><p style="font-size: 30px;">>> Rainbow Property Management:</p></b>
-    <p style="font-size: 20px;">Software Engineer</p>
+    <b><p id="Text_Head">>> Rainbow Property Management:</p></b>
+    <p>Software Engineer</p>
     <p>Constructed a fully functional property content manegment system</p>
     <p>-PHP</p>
     <p>-HTML/CSS</p>
     <p>-Javascript/Jquery</p>
   </div>
-  <div>
-    <img style="width: 375px; margin: 0 auto; display: block;"src="Images/RPM_Logo_White.png" alt="test">
+  <div class="logo_div">
+    <img style="width: 320px;"src="Images/RPM_Logo_White.png" alt="test">
   </div>
 </div>
 
@@ -20,14 +20,14 @@
 <!-- Landberg -->
 <div class="container-2">
   <div>
-    <b><p style="font-size: 30px;">>> Landberg Computers:</p></b>
-    <p style="font-size: 20px;">Web Developer</p>
+    <b><p id="Text_Head">>> Landberg Computers:</p></b>
+    <p>Web Developer</p>
     <p>Designed logo and website</p>
     <p>-HTML/CSS</p>
     <p>-Javascript/Jquery</p>
   </div>
-  <div>
-    <img style="width: 130px; margin: auto; display: block;"src="Images/LANDBERG_logo_white.png" alt="test">
+  <div class="logo_div">
+    <img style="width: 130px;"src="Images/LANDBERG_logo_white.png" alt="test">
   </div>
 </div>
 
@@ -36,15 +36,15 @@
 <!-- App -->
 <div class="container-2">
   <div>
-    <b><p style="font-size: 30px;">>> To-Do Android App:</p></b>
-    <p style="font-size: 20px;">App Developer</p>
+    <b><p id="Text_Head">>> To-Do Android App:</p></b>
+    <p >App Developer</p>
     <p>Simple task based to do app</p>
     <p>-Javascript</p>
     <p>-React Native</p>
     <p>-Android Development</p>
   </div>
-  <div>
-    <img style="width: 150px; margin: auto; display: block;"src="Images/TODO_Logo_White.png" alt="test">
+  <div class="logo_div">
+    <img style="width: 150px;"src="Images/TODO_Logo_White.png" alt="test">
   </div>
 </div>
 
@@ -53,15 +53,15 @@
 <!-- ShaneGriffinNet -->
 <div class="container-2">
   <div>
-    <b><p style="font-size: 30px;">>> ShaneGriffin.net:</p></b>
-    <p style="font-size: 20px;">Web Developer</p>
+    <b><p id="Text_Head">>> ShaneGriffin.net:</p></b>
+    <p>Web Developer</p>
     <p>Experimented with animated transitions </p><p>and python for build automation</p>
     <p>-HTML/CSS</p>
     <p>-Javascript/Jquery/Velocity.js</p>
     <p>-Python</p>
   </div>
-  <div>
-    <img style="width: 130px; margin: auto; display: block;"src="Images/SG_Logo_White.png" alt="test">
+  <div class="logo_div" >
+    <img style="width: 130px;"src="Images/SG_Logo_White.png" alt="test">
   </div>
 
 </div>
@@ -92,9 +92,25 @@
   img:hover {
     transform: scale(1.1);
   }
-  img {
+  .logo_div > img {
     transition: all .2s ease-in-out;
+    margin: 0 auto;
+    display: block;
   }
+  #Text_Head {
+    font-size: 30px;
+  }
+  @media only screen and (max-device-width: 580px) {
+    img {
+      margin-top: 40px;
+    }
 
+    div > p {
+      font-size: 50px;
+    }
+    #Text_Head {
+      font-size: 60px;
+    }
+  }
 </style>
 </div>
