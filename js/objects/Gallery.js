@@ -4,6 +4,7 @@ function Gallery(){
   this.imgLargeHolder = null;
   this.images = new Array();
   this.counter = 0;
+  this.loading = document.getElementById("loading")
 
   this.getImages = () => {
     let images = this.images;
@@ -55,6 +56,7 @@ function Gallery(){
   this.showLargeImage = (i) => {
     this.counter = i;
     this.imgLargeHolder.css('display', 'flex');
+    this.loading.style.display = "block";
     this.images[this.counter].loadLargeImage();
   }
   this.hideLargeImage = () => {
@@ -67,7 +69,7 @@ function Gallery(){
 function Img(src, id){
   this.srcID = id;
   this.src = 'Images/Gallery/' + src;
-  this.src_thumb = 'Images/Gallery-Thumb/thumb_' + src;
+  this.src_thumb = 'Images/Gallery-Thumb/thumb-' + src;
   this.srcOBJ = new Image();
   this.srcOBJLarge = new Image();
   this.imElem = null;
@@ -75,13 +77,15 @@ function Img(src, id){
 
   this.load = (ArrayToLoadFrom, callback) => {
     this.srcOBJ.onload = () => {
-      this.imElem.src = this.src;
+      this.imElem.src = this.src_thumb;
       callback(ArrayToLoadFrom);
     }
-    this.srcOBJ.src = this.src;
+    this.srcOBJ.src = this.src_thumb;
   }
   this.loadLargeImage = () => {
+    loading = document.getElementById("loading");
     this.srcOBJLarge.onload = () => {
+      loading.style.display = "none";
       this.imElemLarge.src = this.src;
       this.imElemLarge.style.display = "block";
     }

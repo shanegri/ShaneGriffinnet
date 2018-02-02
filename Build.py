@@ -10,7 +10,7 @@ Builds Index.html
 '''
 
 cDir = os.getcwd()
-filesToIgnore = ['Bundle.pyc', 'package.json', 'javascript.js', 'jquery-3.2.1.min.js', 'velocity.min.js', '.gitignore', 'Build.py', 'Bundle.py']
+filesToIgnore = ['BatchThumbGen.py', 'Bundle.pyc', 'package.json', 'javascript.js', 'jquery-3.2.1.min.js', 'velocity.min.js', '.gitignore', 'Build.py', 'Bundle.py']
 folderToIgnore = [cDir + "/Images/GallerySKIP", cDir + "/.git", cDir + "/Build", cDir + "/js/objects"]
 
 print " "
