@@ -27,6 +27,7 @@ function Gallery(){
   this.init = () => {
     this.imgHolder = $('.content-images');
     this.imgLargeHolder = $('.content-images-large');
+    shuffleArray(this.images);
     this.images.forEach((img, i) => {
       let imgHTML = "<img class='galImg' src='' onclick='expandGalleryImage("+i+")' id="+img.srcID+" alt="+i+"/>"
       this.imgHolder.append("<div class='galImgContainer'>"+imgHTML+"</div>")
@@ -47,11 +48,18 @@ function Gallery(){
     }
   }
   this.setImageSize = () => {
+    console.log(content.width)
     let totalWidth = content.width;
-    let height = Math.floor(totalWidth * .166);
-    let numRows = Math.ceil(this.images.length / 6);
-    this.imgHolder.css('grid-template-columns', 'repeat(6, '+height+'px)')
-    this.imgHolder.css('grid-template-rows', 'repeat('+numRows+', '+height+'px)')
+    let numPerRow = 6;
+    if(totalWidth < 1500) numPerRow = 6;
+    if(totalWidth < 1200) numPerRow = 5;
+    if(totalWidth == 980) numPerRow = 4;
+
+    let size = Math.floor(totalWidth * ((1/numPerRow) + .001));
+    let numRows = Math.ceil(this.images.length / numPerRow);
+
+    this.imgHolder.css('grid-template-columns', 'repeat('+numPerRow+', '+size+'px)')
+    this.imgHolder.css('grid-template-rows', 'repeat('+numRows+', '+size+'px)')
   }
   this.showLargeImage = (i) => {
     this.counter = i;
@@ -91,7 +99,10 @@ function Img(src, id){
     }
     this.srcOBJLarge.src = this.src;
   }
-  this.hideLargeImage = () => { this.imElemLarge.style.display = "none"; }
+  this.hideLargeImage = () => {
+    this.imElemLarge.style.display = "none";
+    this.srcOBJLarge.onload = () => {}
+  }
 
 }
 
