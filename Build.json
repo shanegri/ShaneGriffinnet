@@ -1,0 +1,21 @@
+{
+  "filesToIgnore" : [
+      "BatchThumbGen.py",
+      "Bundle.pyc",
+      "package.json",
+      "javascript.js",
+      "jquery-3.2.1.min.js",
+      "velocity.min.js",
+      ".gitignore",
+      "Build.py",
+      "Bundle.py",
+      "Build.json"
+  ],
+
+  "folderToIgnore" : [
+    "/Images/GallerySKIP",
+    "/.git",
+    "/Build",
+    "/js/objects"
+  ]
+}

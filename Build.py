@@ -2,6 +2,7 @@ from shutil import copyfile
 import os
 import shutil
 import Bundle
+import json
 
 '''
 Bundles js files using Bundle.py
@@ -10,8 +11,10 @@ Builds Index.html
 '''
 
 cDir = os.getcwd()
-filesToIgnore = ['BatchThumbGen.py', 'Bundle.pyc', 'package.json', 'javascript.js', 'jquery-3.2.1.min.js', 'velocity.min.js', '.gitignore', 'Build.py', 'Bundle.py']
-folderToIgnore = [cDir + "/Images/GallerySKIP", cDir + "/.git", cDir + "/Build", cDir + "/js/objects"]
+
+buildConfig = json.load(open('Build.json'))
+filesToIgnore = buildConfig['filesToIgnore']
+folderToIgnore = [cDir + folder for folder in buildConfig['folderToIgnore']]
 
 print " "
 print "---------BUILDING PRODUCTION BUILD-----------"
@@ -53,7 +56,7 @@ def appendBuild(array):
     return retVal
 
 
-def buildIndex(source, destination):
+def buildFile(source, destination):
     fOrg = open(source)
     fDes = open(destination, 'w+')
     useLine = True
@@ -69,7 +72,7 @@ def buildIndex(source, destination):
             fDes.write(line)
     fOrg.close()
     fDes.close()
-    print destination + "  Index built"
+    print destination + "  File built"
 
 folders = appendBuild(genFolderList(cDir))
 files = appendBuild(genFileList())
@@ -88,15 +91,9 @@ for i in folders:
 print ""
 
 for i in range(0, len(files)):
-    if "index.html" in files[i]:
-        buildIndex(filesOrg[i], files[i])
-        continue 
-
+    buildFile(filesOrg[i], files[i])
     print files[i] + " File copied"
-    copyfile(filesOrg[i], files[i])
 os.remove("Bundle.pyc")
 
 print " "
 print "--------BUILD COMPLETE------------"
-
-
