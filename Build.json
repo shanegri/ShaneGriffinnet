@@ -1,21 +1,13 @@
 {
-  "filesToIgnore" : [
-      "BatchThumbGen.py",
-      "Bundle.pyc",
-      "package.json",
-      "javascript.js",
-      "jquery-3.2.1.min.js",
-      "velocity.min.js",
-      ".gitignore",
-      "Build.py",
-      "Bundle.py",
-      "Build.json"
-  ],
+  "bundle": {
+    "src/js" : "build/js/script.js",
+    "src/css": "build/css/styles.css",
+    "src/index.html" : "build/index.html"
+  },
+  "transfer": {
+    "src/resources": "build/resources"
+  },
+  "skip": [
 
-  "folderToIgnore" : [
-    "/Images/GallerySKIP",
-    "/.git",
-    "/Build",
-    "/js/objects"
   ]
 }
