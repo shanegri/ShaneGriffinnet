@@ -7,6 +7,8 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+
+
 class ChangeHandler(FileSystemEventHandler):
     def on_modified(self, event):
         build()
@@ -16,6 +18,7 @@ def main():
     if sys.argv.__len__() == 1:
         build()
     elif sys.argv[1] == "-watch":
+        build()
         print "Watching"
         event_handler = ChangeHandler()
         observer = Observer()
@@ -30,6 +33,7 @@ def main():
     else:
         print "Invalid Arg"
         sys.exit()
+
 
 def build():
     try:
@@ -55,11 +59,10 @@ def build():
         skip = []
         for i in skipConfig:
             skip += genPathList(i)
-
     except:
         print "Skip Config Not Found, No Files Will Be Skipped, Continuing"
         skip = []
-
+        
 
     for folder in bundles:
         try:
@@ -118,7 +121,6 @@ def appendFile(srcfile, destfile, src):
     if src.endswith(".html"):
         appendFileHTML(srcfile, destfile)
     elif src.endswith('.js'):
-        print "Appending JS"
         appendFileJS(srcfile, destfile)
     else:
         for line in iter(srcfile):
