@@ -1,13 +1,15 @@
 var Nav = {
-    init: function(){   
-        this.atHome = true;
+    init: function(){
+        this.currentHash = window.location.hash;    
+        this.atHome = this.currentHash == "#" || this.currentHash == "";
         this.cacheDOM();
         this.bindHandlers();  
         this.hashchange();
     },
     cacheDOM: function() {
         this.$nav = $("#nav-container");
-        this.$content = $("#content-container");
+        this.$contentCon = $("#content-container");
+        this.$content = this.$contentCon.find("#content");
     },
     bindHandlers: function() {
         this.$nav.find('.nav-link').on('click', this.transition.bind(this));
@@ -15,6 +17,8 @@ var Nav = {
     },
 
     gotoHome: function() {
+        this.atHome = true;
+
         this.$nav.removeClass('nav-content-top');
         this.$nav.addClass('nav-content-center');
 
@@ -22,6 +26,8 @@ var Nav = {
         this.$nav.addClass('nav-center');
     },
     gotoHeading: function() {
+        this.atHome = false;
+
         this.$nav.removeClass('nav-content-center');
         this.$nav.addClass('nav-content-top');
 
@@ -30,58 +36,104 @@ var Nav = {
 
     },
 
-    transitionHome: function(complete) {
+    transitionHome: function() {
+        this.atHome = true;
+
         var duration = 900;
 
-        this.$nav.removeClass('nav-content-top');
-        this.$nav.addClass('nav-content-center');
+        var offset = this.$nav.position();
+        var size = {height: this.$nav.height(), width: this.$nav.width()}
 
-        if(!this.atHome) {
-            var offset = this.$nav.position();
-            var size = {height: this.$nav.height(), width: this.$nav.width()}
-    
-            this.$nav.removeClass('nav-top');
-    
-            this.$nav.css({
-                top: offset.top,
-                left: offset.left,
-                width: size.width,
-                height: size.height,
-            });
+        this.$nav.removeClass('nav-top');
 
-            this.$nav.velocity(
-                {
-                    top: $(window).height() * .25,
-                    width: 300,
-                    height: 375
-                },
-                {
-                    easing: [.52,.12,0,1],
-                    duration: duration,
-                    complete: function() {
-                        this.$nav.attr("style", "");
-                        this.$nav.addClass('nav-center')
-                        complete();
-                    }.bind(this)
-                }
-            );
-        }
+        this.$nav.css({
+            top: offset.top,
+            left: offset.left,
+            width: size.width,
+            height: size.height,
+        });
 
-        this.$content.velocity("scroll", {
+        this.$nav.children()
+                .velocity("stop")
+                .velocity(
+                    {
+                        opacity: 0.0
+                    },
+                    {
+                        duration: duration / 2,
+                        complete: function() {
+                            this.$nav.removeClass('nav-content-top');                                       
+                            this.$nav.addClass('nav-content-center');
+                        }.bind(this)
+                    }
+                ).velocity(
+                    {
+                        opacity: 1.0
+                    },
+                    {
+                        easing: "easeOut",
+                        duration: duration / 2,
+                    }
+                )
+
+        this.$nav.velocity("stop")
+                 .velocity(
+            {
+                top: $(window).height() * .25,
+                width: 300,
+                height: 375
+            },
+            {
+                easing: [.52,.12,0,1],
+                duration: duration,
+                complete: function() {
+                    this.$nav.addClass('nav-center')
+                }.bind(this)
+            }
+        );
+        
+        this.$content.velocity("stop")
+                     .velocity(
+                         {
+                            opacity: 0,
+                         },
+                         {
+                            duration: duration / 3 
+                         }
+                     )
+        this.$contentCon.velocity("stop")
+                        .velocity("scroll", {
             offset: -100,
             complete: function() {
-                complete();
-                this.$content.hide()
+                this.$contentCon.hide()
             }.bind(this),
-            duration: 300
+            duration: duration,
+            easing: "easOut"
         });
     },
-    transitionHeading: function(target, complete) {
+    transitionHeading: function(target) {
 
         var duration = 900;
 
-        this.$nav.removeClass('nav-content-center');
-        this.$nav.addClass('nav-content-top');
+        if(this.atHome) {
+        this.$nav.children()
+                .velocity("stop")
+                .velocity(
+                    { opacity: 0.0 },
+                    {
+                        duration: duration / 3,
+                        complete: function() {
+                            this.$nav.removeClass('nav-content-center');
+                            this.$nav.addClass('nav-content-top');                                       
+                        }.bind(this)
+                    })
+                .velocity(
+                    { opacity: 1.0 },
+                    {
+                        easing: "easOut",
+                        duration: duration / 3,
+                    })
+        }
 
         var offset = this.$nav.position();
         var size = {height: this.$nav.height(), width: this.$nav.width()}
@@ -95,10 +147,11 @@ var Nav = {
             height: size.height,
         });
 
-        this.$nav.velocity(
+        this.$nav.velocity("stop")
+                 .velocity(
             {
                 top: 10,
-                width: $(window).width() - 20,
+                width: $(window).width(),
                 height: 70
             },
             {
@@ -107,33 +160,69 @@ var Nav = {
                 complete: function() {
                     this.$nav.attr("style", "");
                     this.$nav.addClass('nav-top')
-                    complete();
                 }.bind(this)
             }
         );
 
-
-        this.$content.show();
+        this.$contentCon.show();
+        this.$content.velocity("stop")
+                    .velocity(
+                        { opacity: 1.0 },
+                        {
+                            duration: duration / 3 
+                        })
+                        
         $(target).velocity("scroll", {
+            easing: [.37,.04,.02,1.01],
             offset: -100,
-            duration: 300
+            duration: duration
         });
+
+        this.atHome = false;
     },
     transition: function(e) {
         var target = $(e.target).attr('href');
+        e.preventDefault();
         window.history.pushState("", "", window.location.pathname + target)
         if(target == "#"){
-            this.transitionHome(() => this.atHome = true);
+            this.transitionHome();
         } else {
-            this.transitionHeading(target, () => this.atHome = false);
+            this.transitionHeading(target);
         }
+
+        this.currentHash = target;
     },
     hashchange: function() {
+
         var hash = window.location.hash;
-        if(hash == "#" || hash == "") {
-            this.gotoHome()
+        var prevHash = this.currentHash;
+        this.currentHash = hash;
+
+        if(hash == "#" || hash == ""){
+            this.gotoHome();
         } else {
-            this.gotoHeading();
+            this.gotoHeading(hash);
         }
+        return;
+
+        if(prevHash == hash) {
+            if(hash == "#" || hash == ""){
+                this.gotoHome();
+            } else {
+                this.gotoHeading(hash);
+            }
+            return;
+        }
+
+        if((prevHash == "#" || prevHash == "") && (hash != "#" || hash != "")) {
+            this.transitionHeading(hash);
+            return;
+        }
+
+        if((prevHash != "#" || prevHash != "") && (hash == "#" || hash == "")) {
+            this.transitionHome();
+            return;
+        }
+ 
     }
 }

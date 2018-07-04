@@ -1,15 +1,16 @@
 * {
-  color: #0c0c0c;
+  color: black;
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
 }
+
 ::-webkit-scrollbar { 
   display: none; 
 }
 body {
   display: flex;
   margin: 0px;
-  background: #0c0c0c;
+  background: black;
 }
 h1 a {
   font-size: inherit;
@@ -24,7 +25,7 @@ a:before {
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: #000;
+    background-color: black;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
@@ -37,21 +38,26 @@ a:hover:before {
   transform: scaleX(1);
 }
 h2 {
-  color: #f9f8f2;
+  color: white;
   font-size: 70px;
   text-align: right;
   margin: 0px;
   margin-top: 100px;
   margin-bottom: 40px;
-  border-bottom: 1px solid #f9f8f2;
+  border-bottom: 1px solid white;
 }
 h3 {
   margin: 0;
-  color: #f9f8f2;
+  color: white;
   font-size: 35px;
 }
+h4 {
+  color: white;
+  margin: 0;
+  /* margin-top: 4px; */
+}
 p {
-  color: #f9f8f2;
+  color: white;
   padding: 0px;
   margin: 0px;
   font-size: 17px;

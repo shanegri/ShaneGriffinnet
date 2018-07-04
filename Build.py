@@ -8,7 +8,6 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
-
 class ChangeHandler(FileSystemEventHandler):
     def on_modified(self, event):
         build()
@@ -35,6 +34,8 @@ def main():
         sys.exit()
 
 
+cssconfig = ""
+
 def build():
     try:
         config = json.load(open('Build.json'))
@@ -53,6 +54,12 @@ def build():
     except:
         transfers = {}
         print "Transfer Config Not Found, Continuing"
+
+    try:
+        global cssconfig
+        cssconfig = config['options']['cssconfig']
+    except:
+        print "No CSS Config Found, Continuing"
 
     try: 
         skipConfig = config['skip']
@@ -83,6 +90,7 @@ def build():
     print "Done."
 
 
+
 def genPathList(path):
     if not os.path.isdir(path):
         return [path]
@@ -104,11 +112,69 @@ def bundle(src, dest):
     files = genPathList(src)
     initDestPath(dest)
     destfile = open(dest, "w+")
-    for i in files:
-        srcfile = open(i)
-        appendFile(srcfile, destfile, i)
-        srcfile.close()
+    if dest.endswith(".html"):
+        bundleHTML(files, destfile)
+    elif dest.endswith('.js'):
+        bundleJS(files, destfile)
+    elif dest.endswith('.css'):
+        bundleCSS(files, destfile)
+    else:
+        print "Unsupported Bundle For: " + dest + " Type" 
+        raise Exception("Unsupported File Type")
+
     destfile.close()
+
+def bundleHTML(files, destfile):
+    for i in files:
+        if not i.endswith(".html"): continue
+        srcfile = open(i)
+        validLine = True
+        for line in iter(srcfile):
+            if "<!--BLOCK-SKIP-->" in line:
+                validLine = False
+
+            if "<!--BLOCK-CONTINUE-->" in line:
+                validLine = True
+                continue
+
+            if "<!--COMMENT-SKIP" in line or "COMMENT-CONTINUE-->" in line:
+                continue
+
+            if validLine: destfile.write(line)
+            destfile.write("\n")
+        srcfile.close()
+
+def bundleJS(files, destfile):
+    for i in files:
+        if not i.endswith('.js'): continue
+        srcfile = open(i)
+        for line in iter(srcfile):
+            destfile.write(line)
+        destfile.write("\n")
+        srcfile.close()
+
+
+def bundleCSS(files, destfile):
+    useconfig = cssconfig != ""
+    cssconfigmap = {}
+    if useconfig:
+        cssconfigfile = open(cssconfig)
+        for line in iter(cssconfigfile):
+            if "=" in line:
+                splitline = line.split()
+                cssconfigmap[splitline[0]] = splitline[2]
+
+    for i in files:
+        if not i.endswith('.css'): continue
+        srcfile = open(i)
+        for line in iter(srcfile):
+            if useconfig:
+                for key, value in cssconfigmap.iteritems():
+                    if key in line: 
+                        line = line.replace(key, value)
+            destfile.write(line)
+        destfile.write("\n")
+        srcfile.close()
 
 def transfer(src, dest):
     files = genPathList(src)
@@ -116,39 +182,6 @@ def transfer(src, dest):
         destpath = dest + i.replace(src, "")
         initDestPath(destpath)
         copyfile(i, destpath)
-
-def appendFile(srcfile, destfile, src):
-    if src.endswith(".html"):
-        appendFileHTML(srcfile, destfile)
-    elif src.endswith('.js'):
-        appendFileJS(srcfile, destfile)
-    else:
-        for line in iter(srcfile):
-            destfile.write(line)
-
-    destfile.write("\n")
-
-
-def appendFileHTML(srcfile, destfile):
-    validLine = True
-    for line in iter(srcfile):
-        if "<!--BLOCK-SKIP-->" in line:
-            validLine = False
-
-        if "<!--BLOCK-CONTINUE-->" in line:
-            validLine = True
-            continue
-
-        if "<!--COMMENT-SKIP" in line or "COMMENT-CONTINUE-->" in line:
-            continue
-
-        if validLine: destfile.write(line)
-
-
-def appendFileJS(srcfile, destfile):
-    for line in iter(srcfile):
-        destfile.write(line)
-
 
 if __name__ == "__main__":
     main()

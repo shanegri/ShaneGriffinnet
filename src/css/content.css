@@ -1,0 +1,21 @@
+#content {
+    margin: 0 auto;
+    width: 60%;
+    padding-top: 1080px;
+    padding-bottom: 1080px;
+}
+.work-container {
+    display: flex;
+    margin-bottom: 40px;
+}
+.work-container > * {
+    flex-basis: 50%;
+    padding: 10px 0px;
+}
+.work-pictures, .work-text {
+    display: flex;
+    align-items: center;
+}
+.picture-gallery {
+    margin: 0 auto;
+}

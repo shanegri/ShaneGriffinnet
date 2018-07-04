@@ -1,13 +1,17 @@
 {
   "bundle": {
+    "src/index.html" : "build/index.html",
     "src/js" : "build/js/script.js",
-    "src/css": "build/css/styles.css",
-    "src/index.html" : "build/index.html"
+    "src/css": "build/css/styles.css"
   },
   "transfer": {
     "src/resources": "build/resources"
   },
   "skip": [
 
-  ]
+  ],
+  "options": {
+    "cssconfig": "src/css/config.pcss",
+    "minifyjs": true
+  }
 }
