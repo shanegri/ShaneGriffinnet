@@ -118,11 +118,29 @@ def bundle(src, dest):
         bundleJS(files, destfile)
     elif dest.endswith('.css'):
         bundleCSS(files, destfile)
+    elif dest.endswith('.php'):
+        bundlePHP(files, destfile)
     else:
         print "Unsupported Bundle For: " + dest + " Type" 
         raise Exception("Unsupported File Type")
 
     destfile.close()
+
+def bundlePHP(files, destfile):
+    for i in files:
+        srcfile = open(i)
+        validLine = True
+        for line in iter(srcfile):
+            if "//BLOCK-SKIP" in line:
+                validLine = False
+
+            if "//BLOCK-CONTINUE" in line:
+                validLine = True
+                continue
+
+            if validLine: destfile.write(line)
+        destfile.write("\n")
+        srcfile.close()
 
 def bundleHTML(files, destfile):
     for i in files:
@@ -130,6 +148,11 @@ def bundleHTML(files, destfile):
         srcfile = open(i)
         validLine = True
         for line in iter(srcfile):
+            if "<!--INCLUDE" in line:
+                incFile = line.split()[1]
+                bundleHTML(genPathList(incFile), destfile)
+                continue
+
             if "<!--BLOCK-SKIP-->" in line:
                 validLine = False
 
@@ -141,7 +164,7 @@ def bundleHTML(files, destfile):
                 continue
 
             if validLine: destfile.write(line)
-            destfile.write("\n")
+        destfile.write("\n")
         srcfile.close()
 
 def bundleJS(files, destfile):

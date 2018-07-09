@@ -1,0 +1,40 @@
+#gallery-container {
+    /* background: blue; */
+    position: relative;
+    line-height: 0;
+    width: 100%;
+    background: rgba(0,0,0,.2);
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+#gallery {
+    margin: 0 auto;
+    /* background: red; */
+    /* height: 300px; */
+}
+
+#gallery-scroll-container {
+    margin: 0 auto;
+    margin-top: 30px;
+    background: rgba(0,0,0,.2);
+    height: 6px;
+    width: 70%;
+    overflow: hidden;
+}
+#gallery-scroll-bar {
+    margin-left: 0px;
+    height: 10px;
+    cursor: pointer;
+    height: 100%;
+    width: 30%;
+    background: white;
+    border-radius: 20px;
+}
+#gallery img {
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}

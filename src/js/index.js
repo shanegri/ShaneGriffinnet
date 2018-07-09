@@ -1,16 +1,22 @@
 $(function() {
+
   App.init();
+
 });
 
 
 var App = {
   init: function() {
-    Nav.init();
+    WindowController.init();
     ScrollController.init();
-    ScrollController.addCallback(function(lowerBound) {
-      if(lowerBound < 800 && !Nav.atHome) {
-        // Nav.transitionHome();
-      }
-    });
+
+    Photography.init(); 
+    Nav.init();
+
+    WindowController.registerResize("nav",Nav.resize.bind(Nav));
+    WindowController.registerResize("photo",Photography.resize.bind(Photography));
+    WindowController.registerResize("scroll",ScrollController.resize.bind(ScrollController));
+
+
   }
 }

@@ -2,10 +2,12 @@
   "bundle": {
     "src/index.html" : "build/index.html",
     "src/js" : "build/js/script.js",
-    "src/css": "build/css/styles.css"
+    "src/css": "build/css/styles.css",
+    "src/server/get-images.php" : "build/server/get-images.php"
   },
   "transfer": {
-    "src/resources": "build/resources"
+    "src/resources": "build/resources",
+    "src/images/thumb": "build/images/thumb"
   },
   "skip": [
 

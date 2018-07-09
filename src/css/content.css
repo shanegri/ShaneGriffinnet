@@ -1,21 +1,44 @@
+#content-container {
+    width: 100%;
+}
 #content {
     margin: 0 auto;
-    width: 60%;
+    width: 100%;
     padding-top: 1080px;
     padding-bottom: 1080px;
 }
-.work-container {
-    display: flex;
-    margin-bottom: 40px;
-}
-.work-container > * {
-    flex-basis: 50%;
-    padding: 10px 0px;
-}
-.work-pictures, .work-text {
-    display: flex;
-    align-items: center;
-}
-.picture-gallery {
+.content-min {
+    width: 70%;
     margin: 0 auto;
 }
+
+.work-content {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 45px;
+}
+.work-content > * {
+    flex-basis: 50%;
+}
+.work-content .work-right h3 {
+    text-align: right;
+}
+.work-content .work-left {
+    padding-right: 20px;
+}
+.work-content .work-right {
+    padding-left: 20px;
+}
+.work-right-sub {
+    display: flex;
+}
+.work-right-sub > * {
+    flex-basis: 50%;
+    padding: 10px;
+}
+#content a {
+    color: blue;
+    text-decoration: none;
+    display: block;
+}
+

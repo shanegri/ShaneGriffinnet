@@ -5,6 +5,7 @@ var Nav = {
         this.cacheDOM();
         this.bindHandlers();  
         this.hashchange();
+        this.resize({width: $(window).width()})
     },
     cacheDOM: function() {
         this.$nav = $("#nav-container");
@@ -15,8 +16,14 @@ var Nav = {
         this.$nav.find('.nav-link').on('click', this.transition.bind(this));
         $(window).on('hashchange', this.hashchange.bind(this));
     },
+    resize: function(w) {
+
+    },
 
     gotoHome: function() {
+
+        this._removeScrollHandler();
+
         this.atHome = true;
 
         this.$nav.removeClass('nav-content-top');
@@ -26,6 +33,9 @@ var Nav = {
         this.$nav.addClass('nav-center');
     },
     gotoHeading: function() {
+
+        this._registerScrollHandler();
+
         this.atHome = false;
 
         this.$nav.removeClass('nav-content-center');
@@ -37,6 +47,9 @@ var Nav = {
     },
 
     transitionHome: function() {
+
+        this._removeScrollHandler();
+
         this.atHome = true;
 
         var duration = 900;
@@ -87,7 +100,7 @@ var Nav = {
                 easing: [.52,.12,0,1],
                 duration: duration,
                 complete: function() {
-                    this.$nav.addClass('nav-center')
+                    this.$nav.addClass('nav-center');
                 }.bind(this)
             }
         );
@@ -159,7 +172,8 @@ var Nav = {
                 duration: duration,
                 complete: function() {
                     this.$nav.attr("style", "");
-                    this.$nav.addClass('nav-top')
+                    this.$nav.addClass('nav-top');
+                    this._registerScrollHandler();
                 }.bind(this)
             }
         );
@@ -224,5 +238,16 @@ var Nav = {
             return;
         }
  
+    },
+    _registerScrollHandler: function() {
+        ScrollController.registerScroll("nav", function(s) {
+            if(s < 800){
+                ScrollController.removeScroll("nav");
+                Nav.transitionHome()
+            }
+        })
+    },
+    _removeScrollHandler: function() {
+        ScrollController.removeScroll("nav");
     }
 }
