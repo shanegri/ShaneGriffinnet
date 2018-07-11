@@ -1,40 +1,43 @@
-.nav-content-top-mobile {
-    display: flex;
-    background: red;
-}
-.nav-content-top-mobile > * {
-    display: inline-block;
-    align-self: center;
-    flex-basis: 33%;
-}
-.nav-content-top-mobile #portrait-container * { 
-    vertical-align: middle; 
-    display: inline-block;
-    margin: 0px 10px;
-}
-.nav-content-top-mobile #portrait {
-    position: relative;
-    display: none;
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    background: grey;
-    margin-right: 0px;
-}
-.nav-content-top-mobile h1 {
-    color: black;
-    letter-spacing: 4px;
-    font-size: 20px;
-}
-.nav-content-top-mobile address a, .nav-content-top-mobile nav a {
-    text-decoration: none;
-    margin: 0px 10px;
-} 
-.nav-content-top-mobile nav {
-    text-align: center;
-    font-size: 18px;
-}
-.nav-content-top-mobile address {
-    text-align: right;
-    font-size: 20px;
+@media only screen and (max-width: 700px) {
+    .nav-content-top {
+        display: block;
+    }
+    .nav-content-top > * {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-content-top #portrait-container * { 
+        margin: 0px 10px;
+        margin-top: 6px
+    }
+    .nav-content-top #portrait {
+        display: none;
+    }
+    .nav-content-top h1 {
+        margin: 0 auto;
+        color: black;
+        letter-spacing: 4px;
+        font-size: 20px;
+        margin-bottom: 4px;
+    }
+    .nav-content-top address a, .nav-content-top nav a {
+        text-decoration: none;
+        margin: 0px 10px;
+    } 
+    .nav-content-top nav {
+        margin-top: 7px;
+        margin-bottom: 12px;
+        text-align: center;
+        font-size: 17px;
+    }
+    .nav-content-top address {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .nav-top {
+        /* height: 100px !important; */
+    }
+    
 }

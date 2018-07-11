@@ -27,7 +27,7 @@ scroll: function() {
             for(i in this.scrollElems) this.scrollElems[i].checkScroll(lowerBound, upperBound);
         
             for(i in this.scrollCallbacks) this.scrollCallbacks[i](lowerBound, upperBound);
-        }.bind(this), 200)
+        }.bind(this), 180)
     }
 },
 resize: function(w) {

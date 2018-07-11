@@ -1,11 +1,12 @@
 var Nav = {
     init: function(){
+        this.navTopHeight = 70;
         this.currentHash = window.location.hash;    
         this.atHome = this.currentHash == "#" || this.currentHash == "";
         this.cacheDOM();
+        this.resize({width: $(window).width()})
         this.bindHandlers();  
         this.hashchange();
-        this.resize({width: $(window).width()})
     },
     cacheDOM: function() {
         this.$nav = $("#nav-container");
@@ -17,7 +18,14 @@ var Nav = {
         $(window).on('hashchange', this.hashchange.bind(this));
     },
     resize: function(w) {
-
+        if(w.width > 700) {
+            this.navTopHeight = 70;
+        } else {
+            this.navTopHeight = 110;
+        }
+        if(!this.atHome){
+            this.$nav.css({"height": this.navTopHeight + "px"});
+        }
     },
 
     gotoHome: function() {
@@ -43,6 +51,7 @@ var Nav = {
 
         this.$nav.removeClass('nav-center');
         this.$nav.addClass('nav-top');
+        this.$nav.css({"height": this.navTopHeight + "px"})
 
     },
 
@@ -165,7 +174,7 @@ var Nav = {
             {
                 top: 10,
                 width: $(window).width(),
-                height: 70
+                height: this.navTopHeight
             },
             {
                 easing: [.52,.12,0,1],
@@ -173,6 +182,7 @@ var Nav = {
                 complete: function() {
                     this.$nav.attr("style", "");
                     this.$nav.addClass('nav-top');
+                    this.$nav.css({"height": this.navTopHeight + "px"})
                     this._registerScrollHandler();
                 }.bind(this)
             }

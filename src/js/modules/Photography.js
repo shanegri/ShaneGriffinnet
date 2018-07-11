@@ -10,7 +10,7 @@ var Photography = {
         this.rows = 2
 
         $.ajax({
-           url: "http://localhost/src/server/get-images.php",
+           url: App.host + "server/get-images.php",
            dataType: "json",
            success: ajaxSuccess.bind(this)
         });
@@ -19,7 +19,7 @@ var Photography = {
             if(response.status == "good"){
                 var images = response['images'];
                 for(i in images){
-                    var img_url = "http://localhost/src/images/thumb/" + images[i];
+                    var img_url = App.host + "images/thumb/" + images[i];
                     this.photo_objs.push(new Photo(this.$gallery, img_url));
                 }
 
@@ -43,6 +43,8 @@ var Photography = {
     },
     //'Recursively' calls load on each photo object
     transitionOn: function() {
+        this.$container.on('scroll', this.scrollHandler.bind(this));
+
         if(this.isActive) return;
         this.isActive = true;
 
@@ -65,6 +67,7 @@ var Photography = {
     },
     
     transitionReset: function() {
+        this.$container.off('scroll');
         this.isActive = false;
         for(i in this.photo_objs) this.photo_objs[i].resetTransition();
     },
@@ -95,6 +98,17 @@ var Photography = {
     resize: function(w) {
         this.maxScroll = Math.max(this.$galleryPadding.width() - w.width, 0);
         ScrollBar.resize(w);
+    },
+    scrollHandler: function() {
+        if(!ScrollBar.active) {
+            if(!this.mobileScrolling) { 
+                this.mobileScrolling = true;
+                setTimeout(function() {
+                    this.mobileScrolling = false;
+                    ScrollBar.setBarStatic(this.$container.scrollLeft() / this.maxScroll);
+                }.bind(this), 40);
+            }
+        }
     }
 }
 
@@ -109,8 +123,8 @@ Photo.prototype.setSize = function(size) {
     this.$img.css(size);
 }
 Photo.prototype.registerHandlers = function() {
-    this.$img.on('mouseover', this.mouseover.bind(this));
-    this.$img.on('mouseleave', this.mouseleave.bind(this));
+    // this.$img.on('mouseover', this.mouseover.bind(this));
+    // this.$img.on('mouseleave', this.mouseleave.bind(this));
 }
 Photo.prototype.initLoad = function(i, complete_f) {
     if(this.isLoaded) {
@@ -170,6 +184,7 @@ var ScrollBar = {
         this.$bar.on('mousedown', this.mousedown.bind(this));
     },
     mousedown: function(e){
+        this.active = true;
         e.preventDefault();
         $(window).bind('mousemove', this.mousemove.bind(this));
         $(window).bind('mouseup', this.mouseup.bind(this));
@@ -187,6 +202,7 @@ var ScrollBar = {
         }
     },
     mouseup: function() {
+        this.active = false;
         $(window).unbind('mousemove');
         $(window).unbind('mouseup');
     },
@@ -206,5 +222,9 @@ var ScrollBar = {
     setBar: function(precent) {
         this.marginLeft = this.maxScroll * precent;
         this.updateBar();
+    },
+    setBarStatic: function(precent) {
+        this.marginLeft = precent * this.maxScroll;
+        this.$bar.css({"margin-left": this.marginLeft});
     }
 }

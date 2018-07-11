@@ -42,3 +42,25 @@
     display: block;
 }
 
+@media only screen and (max-width: 700px) {
+    .work-content {
+        display: block;
+    }
+    .work-content .work-right h3 {
+        text-align: left;
+    }
+    .work-right-sub > * {
+        padding: 0px;
+    }
+    .work-content .work-left {
+        padding-right: 0px;
+    }
+    .work-content .work-right {
+        padding-left: 0px;
+    }
+    .content-min {
+        overflow-x: hidden
+        width: 90%;
+        margin: 0 auto;
+    }
+}

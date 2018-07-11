@@ -8,7 +8,6 @@
 .nav-top {
     width: 100% !important;
     top: 10px !important;
-    height: 70px !important;
 }
 .nav-content-center > *, .nav-content-center #portrait-container *{
     margin: 22px auto;
@@ -28,7 +27,6 @@
 #nav-container a {
     user-select: none;
 }
-
 .nav-content-center nav a {
     width: min-content;
     margin: 15px auto;
