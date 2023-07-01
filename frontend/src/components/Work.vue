@@ -34,7 +34,7 @@ export default {
         },
         {
           id: 1,
-          company: 'University at Buffalo School of Engineering and Applied Sciences',
+          company: 'University at Buffalo SEAS',
           role: 'Web Developer Intern',
           dates: 'May 2018 - May 2020',
           skills: 'PHP, SQL, HTML/CSS/JS, Python'

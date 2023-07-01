@@ -1,0 +1,33 @@
+{
+  "db": "SQLite",
+  "16399da14221d1e6650365a952a7e0efc64b9c80f0da8645d9b681870d1d0428": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "DELETE FROM images WHERE id = ?"
+  },
+  "38e83f2634b579faf0aacb491695e53905f6ba26249fffc3057645696d77b121": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 6
+      }
+    },
+    "query": "UPDATE images SET path = ?, subject = ?, location = ?, time_frame = ?, display_order = ? WHERE id = ?"
+  },
+  "ec9d47dfd99aca6c1d7ace17db980fa24a18013834e6844ffcb076abf7d49fa4": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "\n        INSERT INTO images (path, display_order)\n        VALUES (?, (SELECT IFNULL(MAX(display_order), 0) + 1 FROM images))\n        "
+  }
+}

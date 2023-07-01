@@ -35,6 +35,8 @@ async fn add_image(
 ) -> Result<HttpResponse, Error> {
     let mut filepath = String::new();
 
+    let images_path: String = env::var("IMAGES_PATH").expect("IMAGES_PATH must be set");
+
     // iterate over multipart stream
     while let Ok(Some(mut field)) = payload.try_next().await {
         let content_disposition = field.content_disposition();
@@ -44,7 +46,8 @@ async fn add_image(
             "image" => {
                 let filename = field.content_disposition().get_filename().unwrap();
                 let path = format!(
-                    "/home/shane/projects/shanegriffinnet/backend/{}",
+                    "{}/{}",
+                    &images_path,
                     sanitize_filename::sanitize(&filename)
                 );
                 filepath = path.clone();
@@ -184,6 +187,12 @@ async fn main() -> std::io::Result<()> {
 
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
+    let _ = env::var("IMAGES_PATH").expect("IMAGES_PATH must be set");
+
+    let public_path = env::var("PUBLIC_PATH").expect("PUBLIC_PATH must be set");
+
+    let bind_address = env::var("BIND_ADDRESS").expect("BIND_ADDRESS must be set");
+
     let pool: Pool<Sqlite> = SqlitePoolOptions::new()
         .connect(&database_url)
         .await
@@ -197,9 +206,9 @@ async fn main() -> std::io::Result<()> {
             .service(delete_image)
             .service(get_image)
             .service(get_images)
-            .service(fs::Files::new("/", "./../frontend/dist").index_file("index.html"))
+            .service(fs::Files::new("/", &public_path).index_file("index.html"))
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind((bind_address, 8080))?
     .run()
     .await
 }

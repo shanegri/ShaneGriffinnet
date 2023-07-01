@@ -2,29 +2,39 @@
 
 Experiments with Rust for the web using Sqlx/Actix/Vue/Tailwind.
 
+Nginx is used as a proxy for ssl. 
+
+## Requirements
+
+cargo, sqlx-cli, npm
+
 ## Development
 
-### In frontend/
+```cp .env.example .env```
 
-```npm run build -- --watch```
+Update DATA_PATH & API_KEYm, set ENVIRONMENT to dev.
 
-### In backend/
+Run backend:
 
-Create database
+```make run-dev-backend```
 
-```sqlite3 database.db < ../database/0_create_images.sql```
+In new terminal, run compile watch for frontend:
 
-Run server
-
-```cargo run```
-
-Alternatively for watch mode:
-
-TODO: This crashes WSL's fs unfortunately, only use cargo run on WSL.
-
-```cargo watch -x run```
+```make run-dev-frontend```
 
 ## Deployment 
 
-TODO:
+```cp .env.example .env```
+
+Update DATA_PATH & API_KEYm, set ENVIRONMENT to prod.
+
+```make build```
+
+Run the containers:
+
+```make up```
+
+Or run in background:
+
+```make up ARGS="-d"```
 
