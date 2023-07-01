@@ -1,18 +1,20 @@
 # shanegriffin.net
 
-Experiments with Rust for the web using Sqlx/Actix/Vue/Tailwind.
+Experiments & learning with Rust as a web sevice with Vue.
 
-Nginx is used as a proxy for ssl. 
+Backend: Sqlite3, Sqlx, Actix
 
-## Requirements
+Frontend: Vue, Tailwind
 
-cargo, sqlx-cli, npm
+## System Requirements
+
+cargo, sqlx-cli, npm w/ latest node, sqlite3.
 
 ## Development
 
 ```cp .env.example .env```
 
-Update DATA_PATH & API_KEYm, set ENVIRONMENT to dev.
+Update DATA_PATH & API_KEY, set ENVIRONMENT to dev.
 
 Run backend:
 
@@ -26,7 +28,7 @@ In new terminal, run compile watch for frontend:
 
 ```cp .env.example .env```
 
-Update DATA_PATH & API_KEYm, set ENVIRONMENT to prod.
+Update DATA_PATH & API_KEY, set ENVIRONMENT to prod.
 
 ```make build```
 
@@ -38,3 +40,12 @@ Or run in background:
 
 ```make up ARGS="-d"```
 
+## Future
+
+* backend ssl
+* use actix http auth
+* nginx serves static files
+* dockerize system requirements
+* tests
+* try db other then postgres
+* general cleanup, error handling, etc.

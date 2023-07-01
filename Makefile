@@ -18,6 +18,8 @@ setup:
 	mkdir -p ${DATA_PATH}/images
 	mkdir -p ${DATA_PATH}/public
 
+	sqlite3 ${DATA_PATH}/database.db < backend/migrations/0_create_images.sql
+
 	cd backend && \
 	cargo sqlx migrate run --database-url sqlite:${DATA_PATH}/database.db
 
@@ -44,3 +46,4 @@ ARGS ?=
 
 up:
 	docker-compose up $(ARGS)
+	

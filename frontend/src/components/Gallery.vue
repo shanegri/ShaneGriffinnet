@@ -15,13 +15,13 @@
     >
       <div class="relative">
         <button
-          class="text-gray-900 absolute left-0 ml-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
+          class="text-gray-600 absolute left-0 ml-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
           @click.prevent="previousImage"
         >
           ˂
         </button>
 
-        <button class="text-gray-900 text-2xl" @click.prevent="closeImage">🗙</button>
+        <button class="text-gray-600 text-2xl" @click.prevent="closeImage">🗙</button>
 
         <img
           :src="'image/' + selectedImage.id"
@@ -30,7 +30,7 @@
         />
 
         <button
-          class="text-gray-900 absolute right-0 mr-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
+          class="text-gray-600 absolute right-0 mr-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
           @click.prevent="nextImage"
         >
           ˃

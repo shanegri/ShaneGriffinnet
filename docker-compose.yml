@@ -14,6 +14,7 @@ services:
     image: sgn-backend
     container_name: sgn
     environment: 
+      - API_KEY=${API_KEY}
       - IMAGES_PATH=/usr/src/data/images
       - PUBLIC_PATH=/usr/src/data/public
       - DATABASE_URL=/usr/src/data/database.db

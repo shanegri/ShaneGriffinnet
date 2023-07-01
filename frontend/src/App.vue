@@ -70,6 +70,7 @@
             <Gallery />
             <div class="flex justify-end">
               <button
+                v-if="isAdmin"
                 class="text-gray-800 p-5 text-xs hidden sm:block"
                 @click="activeTab = 'admin'"
               >
@@ -116,6 +117,12 @@ import Work from './components/Work.vue'
 import AdminImageForm from './components/AdminImageForm.vue'
 
 export default {
+  computed: {
+    isAdmin() {
+      const params = new URLSearchParams(window.location.search)
+      return params.get('admin') === 'true'
+    }
+  },
   data() {
     return {
       activeTab: 'photos',
