@@ -45,5 +45,5 @@ build: setup
 ARGS ?=
 
 up:
-	docker-compose up $(ARGS)
+	docker compose up $(ARGS)
 	

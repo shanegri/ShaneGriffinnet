@@ -6,9 +6,11 @@ Backend: Sqlite3, Sqlx, Actix
 
 Frontend: Vue, Tailwind
 
+Nginx used as reverse proxy for ssl.
+
 ## System Requirements
 
-cargo, sqlx-cli, npm w/ latest node, sqlite3.
+make, cargo, sqlx-cli, npm w/ latest node, sqlite3.
 
 ## Development
 
@@ -49,3 +51,4 @@ Or run in background:
 * tests
 * try db other then postgres
 * general cleanup, error handling, etc.
+* build & deploy w/ gh actions

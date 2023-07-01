@@ -45,6 +45,7 @@ async fn main() -> std::io::Result<()> {
             .service(routes::get_images)
             .service(fs::Files::new("/", &public_path).index_file("index.html"))
     })
+    .workers(2)
     .bind((bind_address, 8080))?
     .run()
     .await

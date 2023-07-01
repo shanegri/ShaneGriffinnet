@@ -9,7 +9,7 @@
           <img class="rounded-full" src="./assets/shane.jpg" alt="shane" />
         </div>
         <h1 class="text-2xl">Shane Griffin</h1>
-        <h2 class="text-gray-600 mb-3">Full Stack Developer</h2>
+        <h2 class="text-gray-600 mb-3 whitespace-nowrap">Full Stack Developer</h2>
 
         <ul id="links" class="p-0 m-0 space-y-2 mx-auto text-center" style="width: fit-content">
           <li class="flex items-start">
@@ -63,7 +63,7 @@
         <!-- Content -->
         <div class="flex-1 max-h-screen overflow-auto px-6 py-4 pt-0 flex flex-col">
           <div v-show="activeTab === 'admin'">
-            <AdminImageForm />
+            <AdminImageForm :activeTab="activeTab" />
           </div>
 
           <div v-show="activeTab === 'photos'">

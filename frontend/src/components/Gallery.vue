@@ -6,34 +6,35 @@
       class="flex cursor-pointer"
       @click="openImage(image)"
     >
-      <img :src="'image/' + image.id" alt="image.subject" class="w-full h-auto object-scale-down" />
+      <img :src="'image/' + image.id" alt="image.subject" class="w-full h-auto object-scale-down bg-dark" />
     </div>
 
     <div
       v-if="showModal"
-      class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 flex items-center justify-center p-10"
+      class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 flex items-center justify-center p-10 overflow-hidden"
     >
       <div class="relative">
         <button
-          class="text-gray-600 absolute left-0 ml-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
+          class="text-gray-600 absolute left-0 ml-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-14"
           @click.prevent="previousImage"
         >
-          ˂
+          <i class="fa fa-arrow-left"></i>
         </button>
 
-        <button class="text-gray-600 text-2xl" @click.prevent="closeImage">🗙</button>
+        <button class="text-gray-600 text-3xl" @click.prevent="closeImage">
+          <i class="fa fa-times"></i>
+        </button>
 
         <img
           :src="'image/' + selectedImage.id"
           alt="test"
-          class="object-cover max-h-[80vh] max-w-[80vw] mx-auto"
+          class="object-cover max-h-[80vh] max-w-[70vw] mx-auto"
         />
-
         <button
-          class="text-gray-600 absolute right-0 mr-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-12"
+          class="text-gray-600 absolute right-0 mr-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-14"
           @click.prevent="nextImage"
         >
-          ˃
+          <i class="fa fa-arrow-right"></i>
         </button>
 
         <h4 class="text-sm absolute w-full text-white text-left">{{ selectedImage.time_frame }}</h4>

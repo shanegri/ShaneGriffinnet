@@ -100,6 +100,9 @@
 import axios from 'axios'
 
 export default {
+  props: { 
+    activeTab: String
+  },
   computed: {
     sortedImages() {
       return [...this.images].sort((a, b) => a.display_order - b.display_order)
@@ -114,8 +117,12 @@ export default {
     }
   },
 
-  async mounted() {
-    this.fetchImages()
+  watch: {
+    activeTab(tab) {
+      if (tab === 'admin') {
+        this.fetchImages();
+      }
+    }
   },
 
   methods: {
@@ -139,15 +146,12 @@ export default {
 
     async deleteImage(id) {
       try {
-        await axios.delete(
-          `/image/${id}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `${this.authKey}`
-            }
+        await axios.delete(`/image/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${this.authKey}`
           }
-        )
+        })
         this.images = this.images.filter((image) => image.id !== id)
       } catch (error) {
         alert('Error deleting image: ' + error.message)
