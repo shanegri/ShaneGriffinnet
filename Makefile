@@ -14,6 +14,14 @@ ifndef API_KEY
 $(error API_KEY is not set)
 endif
 
+fmt:
+	cd backend && cargo fmt
+	cd frontend && npm run format
+
+clean:
+	cd backend && cargo clean
+	rm data/public/ -rf
+
 setup:
 	mkdir -p ${DATA_PATH}/images
 	mkdir -p ${DATA_PATH}/public

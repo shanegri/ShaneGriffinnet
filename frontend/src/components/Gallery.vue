@@ -6,7 +6,12 @@
       class="flex cursor-pointer"
       @click="openImage(image)"
     >
-      <img :src="'image/' + image.id" alt="image.subject" class="w-full h-auto object-scale-down bg-dark" />
+      <img
+        loading="lazy"
+        :src="'image/' + image.id"
+        :alt="image.time_frame + ' ' + image.subject + ' ' + image.location"
+        class="w-full h-auto object-scale-down bg-dark"
+      />
     </div>
 
     <div
@@ -28,7 +33,7 @@
         <img
           :src="'image/' + selectedImage.id"
           alt="test"
-          class="object-cover max-h-[80vh] max-w-[70vw] mx-auto"
+          class="object-cover max-h-[80vh] max-w-[73vw] mx-auto"
         />
         <button
           class="text-gray-600 absolute right-0 mr-[-100px] top-1/2 transform -translate-y-1/2 bg-transparent text-4xl p-14"
@@ -37,9 +42,25 @@
           <i class="fa fa-arrow-right"></i>
         </button>
 
-        <h4 class="text-sm absolute w-full text-white text-left">{{ selectedImage.time_frame }}</h4>
-        <h4 class="text-sm absolute w-full text-white text-center">{{ selectedImage.subject }}</h4>
-        <h4 class="text-sm absolute w-full text-white text-right">{{ selectedImage.location }}</h4>
+        <!-- mobile image text -->
+        <div class="block sm:hidden text-left text-white">
+          <h4 class="text-sm">{{ selectedImage.time_frame }}</h4>
+          <h4 class="text-sm">{{ selectedImage.subject }}</h4>
+          <h4 class="text-sm">{{ selectedImage.location }}</h4>
+        </div>
+
+        <!-- desktop image text -->
+        <div class="hidden sm:block">
+          <h4 class="text-sm absolute w-full text-left text-white">
+            {{ selectedImage.time_frame }}
+          </h4>
+          <h4 class="text-sm absolute w-full text-center text-white">
+            {{ selectedImage.subject }}
+          </h4>
+          <h4 class="text-sm absolute w-full text-right text-white">
+            {{ selectedImage.location }}
+          </h4>
+        </div>
 
         <!-- tooltip, hidden on mobile -->
         <div class="pt-6 text-center hidden sm:block" :class="{ 'fade-out': !showTooltip }">

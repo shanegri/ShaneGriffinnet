@@ -19,7 +19,6 @@ pub struct Auth {
     pub key: String,
 }
 
-
 // TODO: Make this middleware
 // Return a response if invalid
 fn check_api_key(req: &HttpRequest) -> Option<HttpResponse> {

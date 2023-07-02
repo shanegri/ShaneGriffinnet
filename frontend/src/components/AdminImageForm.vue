@@ -100,7 +100,7 @@
 import axios from 'axios'
 
 export default {
-  props: { 
+  props: {
     activeTab: String
   },
   computed: {
@@ -120,7 +120,7 @@ export default {
   watch: {
     activeTab(tab) {
       if (tab === 'admin') {
-        this.fetchImages();
+        this.fetchImages()
       }
     }
   },

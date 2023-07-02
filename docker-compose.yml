@@ -6,6 +6,7 @@ services:
     container_name: proxy
     volumes:
       - ./nginx-${ENVIRONMENT}.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
