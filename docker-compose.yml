@@ -1,23 +1,25 @@
 version: '3'
 services:
 
-  proxy: 
+  nginx: 
     image: nginx:latest
-    container_name: proxy
+    container_name: sgn-nginx
     volumes:
-      - ./nginx-${ENVIRONMENT}.conf:/etc/nginx/nginx.conf
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/mime.types:/etc/nginx/mime.types
+      - ${CERT_DIR}:/etc/letsencrypt/live/shanegriffin.net/
+      - ${DATA_PATH}/public:/var/www/public
+      - ${DATA_PATH}/images:/var/www/images
     ports:
       - "80:80"
       - "443:443"
 
   sgn:
     image: sgn-backend
-    container_name: sgn
+    container_name: sgn-backend
     environment: 
       - API_KEY=${API_KEY}
       - IMAGES_PATH=/usr/src/data/images
-      - PUBLIC_PATH=/usr/src/data/public
       - DATABASE_URL=/usr/src/data/database.db
       - BIND_ADDRESS=0.0.0.0
     volumes:

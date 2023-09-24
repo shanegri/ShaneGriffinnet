@@ -1,0 +1,7 @@
+types {
+    text/html                html;
+    text/css                 css;
+    image/jpeg               jpg;
+    image/vnd.microsoft.icon ico;
+    application/javascript   js;
+}

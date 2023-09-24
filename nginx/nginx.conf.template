@@ -1,0 +1,63 @@
+http {
+
+  include       /etc/nginx/mime.types;
+  default_type  application/octet-stream;
+
+  # Redirect all traffic to https
+  server {
+    listen 80 default_server;
+    server_name _;
+    client_max_body_size 16M;
+
+    return 301 https://$host$request_uri;
+  }
+
+  server {
+    listen 443 ssl;
+    server_name shanegriffin.net;
+
+    ssl_certificate /etc/letsencrypt/live/shanegriffin.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/shanegriffin.net/privkey.pem;
+
+
+    location /api {
+        client_max_body_size 16M;
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+        proxy_pass http://${PROXY_PASS}:8080;
+    }
+
+    location /images {
+        alias /var/www/images;
+        location ~* \.(jpg)$ {
+            try_files $uri =404;
+        }
+        location ~* \. {
+            return 403;
+        }
+    }
+
+    location / {
+        root /var/www/public;
+        try_files $uri $uri/ @filetype;
+    }
+
+    location @filetype {
+        if ($request_uri ~* \.(css|html|jpg|js|ico)$) {
+            return 404;
+        }
+        return 403;
+    }
+
+    location = /robots.txt {
+        return 200 "User-agent: *\nDisallow: /\n";
+    }
+
+    location ~ /\. { deny all; log_not_found off; }
+  }
+}
+
+events {}

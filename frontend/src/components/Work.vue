@@ -26,21 +26,21 @@ export default {
           skills: 'PHP, SQL, HTML/CSS/JS, CI/CD'
         },
         {
-          id: 1,
+          id: 2,
           company: 'Northrop Grumman',
           role: 'Associate Software Engineer',
           dates: 'Jun 2020 - Aug 2022',
-          skills: 'C/C++, SQL, Qt, Python, Bash, Linux'
+          skills: 'C++, SQL, Qt, Python, Bash, Linux'
         },
         {
-          id: 1,
+          id: 3,
           company: 'University at Buffalo SEAS',
           role: 'Web Developer Intern',
           dates: 'May 2018 - May 2020',
           skills: 'PHP, SQL, HTML/CSS/JS, Python'
         },
         {
-          id: 1,
+          id: 4,
           company: 'University at Buffalo',
           role: 'CSE 115/116 Teaching Assistant',
           dates: 'Aug 2017 - May 2018',

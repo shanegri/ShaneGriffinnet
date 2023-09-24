@@ -49,7 +49,7 @@
             class="pr-1 pl-1 text-white mr-4 tab"
             @click="activeTab = 'photos'"
           >
-            Photography
+            Photos
           </button>
           <button
             :class="{ active: activeTab === 'work' }"
@@ -126,8 +126,7 @@ export default {
   data() {
     return {
       activeTab: 'photos',
-      leftColHeight: 0,
-      images: ['1.jpg', '2.jpg']
+      leftColHeight: 0
     }
   },
   mounted() {

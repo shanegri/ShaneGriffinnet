@@ -10,7 +10,7 @@
     },
     "query": "DELETE FROM images WHERE id = ?"
   },
-  "38e83f2634b579faf0aacb491695e53905f6ba26249fffc3057645696d77b121": {
+  "b1bca48b4e3726449c0bb0722031c57c3edd7c20edb68aee8a387e5dde9aab94": {
     "describe": {
       "columns": [],
       "nullable": [],
@@ -18,9 +18,9 @@
         "Right": 6
       }
     },
-    "query": "UPDATE images SET path = ?, subject = ?, location = ?, time_frame = ?, display_order = ? WHERE id = ?"
+    "query": "UPDATE images SET filename = ?, subject = ?, location = ?, time_frame = ?, display_order = ? WHERE id = ?"
   },
-  "ec9d47dfd99aca6c1d7ace17db980fa24a18013834e6844ffcb076abf7d49fa4": {
+  "f496f4b04bee299025712a32a9ae6e849efb1dd34b3390752fbc93798b35237f": {
     "describe": {
       "columns": [],
       "nullable": [],
@@ -28,6 +28,6 @@
         "Right": 1
       }
     },
-    "query": "\n        INSERT INTO images (path, display_order)\n        VALUES (?, (SELECT IFNULL(MAX(display_order), 0) + 1 FROM images))\n        "
+    "query": "\n                INSERT INTO images (filename, display_order)\n                VALUES (?, (SELECT IFNULL(MAX(display_order), 0) + 1 FROM images))\n                "
   }
 }

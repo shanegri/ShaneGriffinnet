@@ -8,7 +8,7 @@
     >
       <img
         loading="lazy"
-        :src="'image/' + image.id"
+        :src="'images/' + image.filename"
         :alt="image.time_frame + ' ' + image.subject + ' ' + image.location"
         class="w-full h-auto object-scale-down bg-dark"
       />
@@ -31,7 +31,7 @@
         </button>
 
         <img
-          :src="'image/' + selectedImage.id"
+          :src="'images/' + selectedImage.filename"
           alt="test"
           class="object-cover max-h-[80vh] max-w-[73vw] mx-auto"
         />
@@ -105,7 +105,7 @@ export default {
   created() {
     window.addEventListener('keyup', this.handleKeyup)
     axios
-      .get('/images')
+      .get('/api/images')
       .then((response) => (this.images = response.data))
       .catch((error) => console.log(error))
   },

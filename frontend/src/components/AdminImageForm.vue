@@ -31,7 +31,7 @@
       <div v-for="(image, index) in sortedImages" :key="image.id">
         <div class="flex space-x-4">
           <img
-            :src="'image/' + image.id"
+            :src="'images/' + image.filename"
             alt=""
             class="mt-16 mb-2 h-24 object-cover rounded shadow-md"
           />
@@ -131,7 +131,7 @@ export default {
         let formData = new FormData()
         formData.append('image', this.imagePath)
         formData.append('key', this.authKey)
-        await axios.post('/image', formData, {
+        await axios.post('/api/image', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `${this.authKey}`
@@ -146,7 +146,7 @@ export default {
 
     async deleteImage(id) {
       try {
-        await axios.delete(`/image/${id}`, {
+        await axios.delete(`/api/image/${id}`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${this.authKey}`
@@ -161,7 +161,7 @@ export default {
 
     async fetchImages() {
       try {
-        const response = await axios.get(`/images`)
+        const response = await axios.get(`/api/images`)
         this.images = response.data
       } catch (error) {
         alert('Error fetching images: ' + error.message)
@@ -176,7 +176,7 @@ export default {
     async submitForm() {
       try {
         for (let image of this.images) {
-          await axios.patch(`/image/${image.id}`, image, {
+          await axios.patch(`/api/image/${image.id}`, image, {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `${this.authKey}`
